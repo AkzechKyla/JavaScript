@@ -28,9 +28,16 @@
             function updateQuantity(quantity) {
                 if (eval(cartQuantity + quantity) > 10) {
                     alert('The cart is full.');
-                } else {
-                    console.log(`Cart quantity: ${cartQuantity += quantity}`);
+                    return;
                 }
+
+                if (eval(cartQuantity + quantity) < 0) {
+                    alert('Invalid quantity.');
+                    return;
+                }
+
+                console.log(`Cart quantity: ${cartQuantity += quantity}`);
+
             }
 
             function resetQuantity() {
