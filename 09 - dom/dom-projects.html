@@ -18,7 +18,7 @@
         <p>Orders under $40 = +$10 shipping.</p>
         <p>Orders over $40 = FREE shipping.</p>
 
-        <input type="text" id="cost-order" placeholder="Cost of order">
+        <input type="text" id="cost-order" placeholder="Cost of order" onkeydown="handleCostKeydown(event)">
         <button class="calculate-button" onclick="calculate()">Calculate</button>
 
         <script>
@@ -32,20 +32,26 @@
                 }
             }
 
+            function handleCostKeydown(event) {
+                if (event.key === 'Enter') {
+                    calculate();
+                }
+            }
+
             function calculate() {
-                const costOrder = document.getElementById('cost-order');
+                const costInput = document.getElementById('cost-order');
                 const shippingFee = 1000;
                 let totalSF = 0;
 
-                if (costOrder.value < 40) {
-                    totalSF = eval(((parseInt(costOrder.value) * 100) + shippingFee) / 100);
+                if (costInput.value < 40) {
+                    totalSF = eval(((parseInt(costInput.value) * 100) + shippingFee) / 100);
                 } else {
-                    totalSF = costOrder.value;
+                    totalSF = costInput.value;
                 }
 
                 const totalSFdiv = document.getElementById('totalSFdiv') || document.createElement('p');
                 totalSFdiv.id = 'totalSFdiv';
-                totalSFdiv.innerHTML = `${totalSF}`;
+                totalSFdiv.innerHTML = `$${totalSF}`;
                 document.body.appendChild(totalSFdiv);
             }
         </script>
