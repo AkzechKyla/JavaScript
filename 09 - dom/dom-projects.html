@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DOM Projects</title>
+    </head>
+    <body>
+        <p>YouTube Subscribe Button</p>
+        <button class="subscribe-btn" onclick="subscribe()">Subscribe</button>
+        <br><br><br>
+        <p>Rock Paper Scissors</p>
+        <a href="https://supersimple.dev/projects/dom-rock-paper-scissors/">
+            Click here
+        </a>
+        <br><br><br>
+        <p>Amazon Shipping calculator</p>
+        <p>Orders under $40 = +$10 shipping.</p>
+        <p>Orders over $40 = FREE shipping.</p>
+
+        <input type="text" id="cost-order" placeholder="Cost of order">
+        <button class="calculate-button" onclick="calculate()">Calculate</button>
+
+        <script>
+            function subscribe() {
+                const subscribeButton = document.querySelector('.subscribe-btn');
+
+                if (subscribeButton.innerHTML === 'Subscribe') {
+                    subscribeButton.innerHTML = 'Subscribed';
+                } else {
+                    subscribeButton.innerHTML = 'Subscribe';
+                }
+            }
+
+            function calculate() {
+                const costOrder = document.getElementById('cost-order');
+                const shippingFee = 1000;
+                let totalSF = 0;
+
+                if (costOrder.value < 40) {
+                    totalSF = eval(((parseInt(costOrder.value) * 100) + shippingFee) / 100);
+                } else {
+                    totalSF = costOrder.value;
+                }
+
+                const totalSFdiv = document.getElementById('totalSFdiv') || document.createElement('p');
+                totalSFdiv.id = 'totalSFdiv';
+                totalSFdiv.innerHTML = `${totalSF}`;
+                document.body.appendChild(totalSFdiv);
+            }
+        </script>
+    </body>
+</html>
