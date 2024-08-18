@@ -8,13 +8,13 @@
     <body>
         <script>
             const product1 = {
-                name: 'basketball',
+                name: 'volleyball',
                 price: 2095
             }
 
             const product2 = {
                 name: 'volleyball',
-                price: 2100
+                price: 2095
             }
 
             function comparePrice(product1, product2) {
@@ -22,7 +22,13 @@
             }
 
             let lowestPriceProduct = comparePrice(product1, product2);
+
+            function isSameProduct(product1, product2) {
+                return JSON.stringify(product1) === JSON.stringify(product2);
+            }
+
             console.log(lowestPriceProduct);
+            console.log(isSameProduct(product1, product2));
         </script>
     </body>
 </html>
