@@ -4,9 +4,16 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Calculator</title>
+
+        <style>
+            #input-box {
+                width: 100px;
+            }
+        </style>
     </head>
     <body>
         <h3>Simple Calculator</h3>
+        <input type="text" id="input-box" name="input-box">
         <p>
             <button onclick="updateCalculation(1)">1</button>
             <button onclick="updateCalculation(2)">2</button>
@@ -36,20 +43,32 @@
         </p>
 
         <script>
-            let calculation = '';
+            let calculation = localStorage.getItem('calculation') || '';
 
             function updateCalculation(element) {
-                console.log(calculation += `${element}`);
+                calculation += element;
+                console.log(calculation);
+                localStorage.setItem('calculation', calculation);
+                updateBox(calculation);
             }
 
             function calculateResult() {
                 calculation = eval(calculation);
-                console.log(eval(calculation));
+                console.log(calculation);
+                localStorage.setItem('calculation', calculation);
+                updateBox(calculation);
             }
 
             function clearCalculation() {
                 calculation = '';
-                console.log('Cleared.');
+                console.log(calculation);
+                localStorage.setItem('calculation', calculation);
+                updateBox(calculation);
+            }
+
+            function updateBox(calculation) {
+                let inputBox = document.getElementById('input-box');
+                inputBox.value = calculation;
             }
         </script>
     </body>
