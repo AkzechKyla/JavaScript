@@ -44,7 +44,8 @@
                 let totalSF = 0;
 
                 if (costInput.value < 40) {
-                    totalSF = eval(((parseInt(costInput.value) * 100) + shippingFee) / 100);
+                    // Number() same as parseInt()
+                    totalSF = eval(((Number(costInput.value) * 100) + shippingFee) / 100);
                 } else {
                     totalSF = costInput.value;
                 }
