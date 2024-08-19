@@ -17,12 +17,13 @@
         <button onclick="updateQuantity(-2)">-2</button>
         <button onclick="updateQuantity(-3)">-3</button>
         <button onclick="resetQuantity()">Reset Cart</button>
+        <p class="quantity"></p>
 
         <script>
             let cartQuantity = 0;
 
             function showQuantity() {
-                console.log(`Cart quantity: ${cartQuantity}`);
+                document.querySelector('.quantity').innerHTML = `Cart quantity: ${cartQuantity}`;
             }
 
             function updateQuantity(quantity) {
@@ -36,14 +37,13 @@
                     return;
                 }
 
-                console.log(`Cart quantity: ${cartQuantity += quantity}`);
-
+                cartQuantity += quantity;
+                showQuantity();
             }
 
             function resetQuantity() {
                 cartQuantity = 0;
-                console.log('Cart was reset.');
-                console.log(`Cart quantity: ${cartQuantity}`);
+                showQuantity();
             }
         </script>
     </body>
