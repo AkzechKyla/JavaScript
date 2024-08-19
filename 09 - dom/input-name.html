@@ -6,7 +6,7 @@
         <title>Submit Name</title>
     </head>
     <body>
-        <input type="text" class="input-name" placeholder="Name">
+        <input type="text" class="input-name" placeholder="Name" onkeydown="handleSubmitKeydown()">
         <button onclick="displayName()">Submit</button>
         <p class="name"></p>
 
@@ -17,6 +17,12 @@
                 document.querySelector('.name').innerHTML = `Your name is: ${name}`
 
                 console.log(name);
+            }
+
+            function handleSubmitKeydown() {
+                if (event.key === 'Enter') {
+                    displayName();
+                }
             }
         </script>
     </body>
