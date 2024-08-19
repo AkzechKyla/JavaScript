@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Submit Name</title>
+    </head>
+    <body>
+        <input type="text" class="input-name" placeholder="Name">
+        <button onclick="displayName()">Submit</button>
+        <p class="name"></p>
+
+        <script>
+            function displayName() {
+                const name = document.querySelector('.input-name').value;
+
+                document.querySelector('.name').innerHTML = `Your name is: ${name}`
+
+                console.log(name);
+            }
+        </script>
+    </body>
+</html>
