@@ -7,8 +7,9 @@
     </head>
     <body>
 
-        <button onclick="playGame('Heads')">Heads</button>
-        <button onclick="playGame('Tails')">Tails</button>
+        <button class="heads" onclick="playGame('Heads')">Heads</button>
+        <button class="tails" onclick="playGame('Tails')">Tails</button>
+        <p class="players-choice"></p>
 
         <script>
             const score = JSON.parse(localStorage.getItem('score')) || {
@@ -19,6 +20,8 @@
             function playGame(guess) {
                 let  coinValues = ["Heads", "Tails"];
                 let coinFlip = Math.floor(Math.random() * coinValues.length);
+
+                document.querySelector('.players-choice').innerHTML = `You chose: ${guess}`;
 
                 if (guess === coinValues[coinFlip]) {
                     score.wins += 1;
