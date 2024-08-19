@@ -11,7 +11,7 @@
             }
         </style>
     </head>
-    <body>
+    <body onload="updateBox(calculation)">
         <h3>Simple Calculator</h3>
         <input type="text" id="input-box" name="input-box">
         <p>
@@ -48,27 +48,31 @@
             function updateCalculation(element) {
                 calculation += element;
                 console.log(calculation);
-                localStorage.setItem('calculation', calculation);
+                saveCalculation(calculation);
                 updateBox(calculation);
             }
 
             function calculateResult() {
                 calculation = eval(calculation);
                 console.log(calculation);
-                localStorage.setItem('calculation', calculation);
+                saveCalculation(calculation);
                 updateBox(calculation);
             }
 
             function clearCalculation() {
                 calculation = '';
                 console.log(calculation);
-                localStorage.setItem('calculation', calculation);
+                saveCalculation(calculation);
                 updateBox(calculation);
             }
 
             function updateBox(calculation) {
                 let inputBox = document.getElementById('input-box');
                 inputBox.value = calculation;
+            }
+
+            function saveCalculation(calculation) {
+                localStorage.setItem('calculation', calculation);
             }
         </script>
     </body>
