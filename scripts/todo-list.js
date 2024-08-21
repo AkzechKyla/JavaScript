@@ -20,9 +20,13 @@ function addTask() {
     });
 
     function addInTaskList() {
-        taskList.push(taskInput.value);
+        let taskObject = {
+            task: taskInput.value,
+            date: dateInput.value
+        }
+        taskList.push(taskObject);
         taskInput.value = '';
-        console.log(dateInput.value);
+        dateInput.value = '';
 
         renderList();
     }
@@ -30,22 +34,23 @@ function addTask() {
 
 function renderList() {
     let taskHTML = '';
-    let dateHTML = '';
 
     for (let i = 0; i < taskList.length; i++) {
         let taskObject = taskList[i];
-        taskHTML += `<p>${taskObject.task}</p>\n`;
-        dateHTML += `<p>${taskObject.date}</p>`;
+
+        taskHTML += `<div class="task-row">
+            <div>${taskObject.task}</div>
+            <div>${taskObject.date}</div>
+            <button class="delete-btn">DELETE</button>
+        `;
     }
 
-    displayList(taskHTML, dateHTML);
+    displayList(taskHTML);
 }
 
-function displayList(taskHTML, dateHTML) {
-    const taskOutput = document.querySelector('.tasks');
-    const dateOutput = document.querySelector('.dates');
+function displayList(taskHTML) {
+    const taskOutput = document.querySelector('.task-container');
     taskOutput.innerHTML = taskHTML;
-    taskOutput.innerHTML += dateHTML;
 }
 
 addTask();

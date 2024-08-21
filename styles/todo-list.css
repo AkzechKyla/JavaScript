@@ -1,3 +1,13 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
 }
+
+p {
+    margin: 0;
+}
+
+.task-row {
+    display: grid;
+    grid-template-columns: 175px 118px 100px;
+    align-items: center;
+}
