@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Practice Toggle</title>
+
+        <style>
+            .is-toggled {
+                background-color: black;
+                color: white;
+            }
+
+            button {
+                border: none;
+                padding: 10px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <button class="game-btn" onclick="toggle()">Gaming</button>
+
+        <script>
+            function toggle() {
+                const gameBtn = document.querySelector('.game-btn');
+
+                if (!gameBtn.classList.contains('is-toggled')) {
+                    gameBtn.classList.toggle('is-toggled');
+                } else {
+                    gameBtn.classList.remove('is-toggled');
+                }
+            }
+        </script>
+    </body>
+</html>
