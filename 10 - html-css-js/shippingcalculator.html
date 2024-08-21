@@ -4,6 +4,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>DOM Projects</title>
+
+        <style>
+            .error-message {
+                color: red;
+            }
+        </style>
     </head>
     <body>
         <p>YouTube Subscribe Button</p>
@@ -20,7 +26,7 @@
 
         <input type="text" id="cost-order" placeholder="Cost of order" onkeydown="handleCostKeydown(event)">
         <button class="calculate-button" onclick="calculate()">Calculate</button>
-
+        <p class="totalSFdiv"></p>
         <script>
             function subscribe() {
                 const subscribeButton = document.querySelector('.subscribe-btn');
@@ -41,19 +47,23 @@
             function calculate() {
                 const costInput = document.getElementById('cost-order');
                 const shippingFee = 1000;
+                const cost = costInput.value;
                 let totalSF = 0;
 
-                if (costInput.value < 40) {
+                if (cost < 40) {
                     // Number() same as parseInt()
-                    totalSF = eval(((Number(costInput.value) * 100) + shippingFee) / 100);
+                    totalSF = eval(((cost * 100) + shippingFee) / 100);
                 } else {
-                    totalSF = costInput.value;
+                    totalSF = cost;
                 }
 
-                const totalSFdiv = document.getElementById('totalSFdiv') || document.createElement('p');
-                totalSFdiv.id = 'totalSFdiv';
-                totalSFdiv.innerHTML = `$${totalSF}`;
-                document.body.appendChild(totalSFdiv);
+                const totalSFdiv = document.querySelector('.totalSFdiv');
+
+                if (cost < 0) {
+                    totalSFdiv.innerHTML = '<p class="error-message">Error: cost cannot be less than $0</p>';
+                } else {
+                    totalSFdiv.innerHTML = `$${totalSF}`;
+                }
             }
         </script>
     </body>
