@@ -32,6 +32,11 @@ function addTask() {
     }
 }
 
+function deleteTask(i) {
+    taskList.splice(i, 1);
+    renderList();
+}
+
 function renderList() {
     let taskHTML = '';
 
@@ -41,7 +46,7 @@ function renderList() {
         taskHTML += `<div class="task-row">
             <div>${taskObject.task}</div>
             <div>${taskObject.date}</div>
-            <button class="delete-btn">DELETE</button>
+            <button class="delete-btn" onclick="deleteTask(${i})">DELETE</button>
         `;
     }
 
