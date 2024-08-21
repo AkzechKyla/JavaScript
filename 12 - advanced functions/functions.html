@@ -6,6 +6,8 @@
         <title>Practice Advanced Functions</title>
     </head>
     <body>
+        <button class="start-btn" onclick="start()">Start</button>
+
         <script>
             const add = function () {
                 console.log(2 + 3);
@@ -24,6 +26,16 @@
             })
 
             runTwice(add);
+
+            function start() {
+                const startBtn = document.querySelector('.start-btn');
+
+                startBtn.innerHTML = 'Loading...';
+
+                setTimeout(() => {
+                    startBtn.innerHTML = 'Finished!';
+                }, 1000)
+            }
         </script>
     </body>
 </html>
