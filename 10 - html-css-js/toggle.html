@@ -20,18 +20,31 @@
         </style>
     </head>
     <body>
-        <button class="game-btn" onclick="toggle('.game-btn')">Gaming</button>
-        <button class="music-btn" onclick="toggle('.music-btn')">Music</button>
-        <button class="tech-btn" onclick="toggle('.tech-btn')">Tech</button>
+        <button class="game-btn button" onclick="toggle('.game-btn')">Gaming</button>
+        <button class="music-btn button" onclick="toggle('.music-btn')">Music</button>
+        <button class="tech-btn button" onclick="toggle('.tech-btn')">Tech</button>
 
         <script>
             function toggle(selector) {
                 const button = document.querySelector(selector);
 
+                disablePrevButton();
+
                 if (!button.classList.contains('is-toggled')) {
                     button.classList.toggle('is-toggled');
                 } else {
                     button.classList.remove('is-toggled');
+                }
+
+            }
+
+            function disablePrevButton() {
+                const buttons = document.querySelectorAll('.button');
+
+                for (let i = 0; i < buttons.length; i++) {
+                    if (buttons[i].classList.contains('is-toggled')) {
+                        buttons[i].classList.remove('is-toggled');
+                    }
                 }
             }
         </script>
