@@ -1,4 +1,4 @@
-const taskList = [
+const taskList = JSON.parse(localStorage.getItem('taskList')) || [
     {
         task: 'this is a task',
         date: '2024-08-21'
@@ -51,11 +51,16 @@ function renderList() {
     }
 
     displayList(taskHTML);
+    saveToLocalStorage();
 }
 
 function displayList(taskHTML) {
     const taskOutput = document.querySelector('.task-container');
     taskOutput.innerHTML = taskHTML;
+}
+
+function saveToLocalStorage() {
+    localStorage.setItem('taskList', JSON.stringify(taskList));
 }
 
 addTask();
