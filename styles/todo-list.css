@@ -6,8 +6,10 @@ p {
     margin: 0;
 }
 
-.task-row {
+.task-row,
+.todo-container {
     display: grid;
     grid-template-columns: 175px 118px 100px;
     align-items: center;
+    gap: 10px;
 }
