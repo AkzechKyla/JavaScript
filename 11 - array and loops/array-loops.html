@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Arrays and Loops Practice</title>
+    </head>
+    <body>
+        <script>
+            const num = [10, 20, 30];
+
+            // 1 - get last value in an array
+            function getLastValue(array) {
+                return array[array.length - 1];
+            }
+
+            console.log(getLastValue(num));
+
+            function arraySwap(array) {
+                const reversedArray = [];
+                for (let i = array.length - 1; i >= 0; i--) {
+                    reversedArray.push(array[i]);
+                }
+
+                return reversedArray;
+            }
+
+            console.log(arraySwap(['goodbye', 'love', 'hello']));
+        </script>
+    </body>
+</html>
