@@ -26,6 +26,78 @@
             }
 
             console.log(arraySwap(['goodbye', 'love', 'hello']));
+
+            function countByTwo() {
+                for (let i = 0; i  <= 10; i++) {
+                    console.log(i);
+                    i += 1;
+                }
+            }
+
+            countByTwo();
+
+            function addOne(array) {
+                let arrayPlusOne = [];
+
+                for (let i = 0; i < array.length; i++) {
+                    array[i] += 1;
+                    arrayPlusOne.push(array[i]);
+                }
+
+                return arrayPlusOne;
+            }
+
+            console.log(addOne(num));
+
+            function addNum(array, num) {
+                let arrayPlusNum = [];
+
+                for (let i = 0; i < array.length; i++) {
+                    array[i] += num;
+                    arrayPlusNum.push(array[i]);
+                }
+
+                return arrayPlusNum;
+            }
+
+            console.log(addNum(num, 10));
+
+            function addArray(array1, array2) {
+                let maxLengthArray = Math.max(array1.length, array2.length);
+                let sumNumArray = [];
+
+                for (let i = 0; i < maxLengthArray; i++) {
+                    if (array1[i] === undefined) {
+                        array1[i] = 0;
+                    }
+
+                    if (array2[i] === undefined) {
+                        array2[i] = 0;
+                    }
+
+                    sumNumArray.push(array1[i] + array2[i]);
+                }
+
+                return sumNumArray;
+            }
+
+            console.log(addArray([1, 2, 3], [1, 2, 3, 4]));
+
+            function countPositive(nums) {
+                let count = 0;
+
+                for (let i = 0; i < nums.length; i++) {
+                    if (nums[i] > 0) {
+                        count++
+                    } else {
+                        continue;
+                    }
+                }
+
+                return count;
+            }
+
+            console.log(countPositive([1, -2, 2, 3, -4, -5]));
         </script>
     </body>
 </html>
