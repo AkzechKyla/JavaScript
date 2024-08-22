@@ -32,9 +32,15 @@ function addTask() {
     }
 }
 
-function deleteTask(i) {
-    taskList.splice(i, 1);
-    renderList();
+function deleteTask() {
+    const deleteButtons = document.querySelectorAll('.delete-btn');
+
+    deleteButtons.forEach((button, i) => {
+        button.addEventListener('click', () => {
+            taskList.splice(i, 1);
+            renderList();
+        });
+    });
 }
 
 function renderList() {
@@ -46,11 +52,12 @@ function renderList() {
         taskHTML += `<div class="task-row">
             <div>${taskObject.task}</div>
             <div>${taskObject.date}</div>
-            <button class="delete-btn" onclick="deleteTask(${i})">DELETE</button>
+            <button class="delete-btn">DELETE</button>
         `;
     }
 
     displayList(taskHTML);
+    deleteTask();
     saveToLocalStorage();
 }
 
