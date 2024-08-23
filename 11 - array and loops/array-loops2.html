@@ -8,22 +8,21 @@
     <body>
         <script>
             const usernames = ['kyla', 'callie', 'akzech', 'kyla'];
-            let index = -1;
 
-            // usernames.forEach((name, i) => {
-            //     if (name === 'kyla') {
-            //         index = i;
-            //     }
-            // });
+            function findIndex(array, word) {
+                let index = -1;
 
-            for (let i = 0; i < usernames.length; i++) {
-                if (usernames[i] === 'kyla') {
-                    index = i;
-                    break;
+                for (let i = 0; i < array.length; i++) {
+                    if (array[i] === word) {
+                        index = i;
+                        break;
+                    }
                 }
+
+                return index;
             }
 
-            console.log(index);
+            console.log(findIndex(usernames, 'callie'));
 
         </script>
     </body>
