@@ -105,6 +105,12 @@
                     max: 0
                 }
 
+                if (nums.length === 0) {
+                    minMax.min = null;
+                    minMax.max = null;
+                    return minMax;
+                }
+
                 for (let i = 0; i < nums.length - 1; i++) {
                     for (let j = i + 1; j < nums.length; j++) {
                         if (nums[i] > nums[j]) {
