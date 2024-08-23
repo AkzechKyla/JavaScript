@@ -7,14 +7,21 @@
     </head>
     <body>
         <script>
-            const usernames = ['kyla', 'callie', 'akzech'];
+            const usernames = ['kyla', 'callie', 'akzech', 'kyla'];
             let index = -1;
 
-            usernames.forEach((name, i) => {
-                if (name === 'franchezka') {
+            // usernames.forEach((name, i) => {
+            //     if (name === 'kyla') {
+            //         index = i;
+            //     }
+            // });
+
+            for (let i = 0; i < usernames.length; i++) {
+                if (usernames[i] === 'kyla') {
                     index = i;
+                    break;
                 }
-            });
+            }
 
             console.log(index);
 
