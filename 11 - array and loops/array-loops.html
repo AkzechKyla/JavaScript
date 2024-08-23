@@ -127,7 +127,28 @@
                 return minMax;
             }
 
-            console.log(minMax([0, -1, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]));
+            console.log(minMax([3]));
+
+            function countWords(words) {
+                let wordCount = {};
+
+                for (let i = 0; i < words.length; i++) {
+                    let word = words[i];
+                    console.log(words[i]);
+
+                    // use bracket notation to access or set object properties dynamically (not known in advance)
+                    // because dot notation would literally look for a property named "word"
+                    if (wordCount[word] === undefined) {
+                        wordCount[word] = 0;
+                    }
+
+                    wordCount[word] += 1;
+                }
+
+                return wordCount;
+            }
+
+            console.log(countWords(['array', 'cat', 'array', 'cat', 'pet']));
         </script>
     </body>
 </html>
