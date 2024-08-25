@@ -6,21 +6,43 @@
     <title>App</title>
 </head>
 <body>
+    <button onclick="addMessages()">Add</button>
+    <button onclick="removeMessages()">Remove</button>
     <script>
-//         let titleToggle = false;
-//
-//         setInterval(() => {
-//             document.title = titleToggle ? '(2) New messages' : 'App';
-//             titleToggle = !titleToggle;
-//         }, 1000);
+        let messages = 2;
+        let messageInterval;
 
-        setInterval(() => {
-            if (document.title === 'App') {
-                document.title = '(2) New messages';
-            } else {
-                document.title = 'App';
+        function addMessages() {
+            messages += 1;
+            setMessageNotifications(messages);
+        }
+
+        function removeMessages() {
+            if (messages <= 0) {
+                return;
             }
-        }, 1000);
+            messages -= 1;
+            setMessageNotifications(messages);
+        }
+
+        function setMessageNotifications(messages) {
+            clearInterval(messageInterval);
+
+            messageInterval = setInterval(() => {
+                if (document.title === 'App') {
+                    document.title = `(${messages}) New messages`;
+                } else {
+                    document.title = 'App';
+                }
+            }, 1000);
+
+            if (messages === 0) {
+                document.title = 'App';
+                clearInterval(messageInterval);
+            }
+        }
+
+        setMessageNotifications(messages);
     </script>
 </body>
 </html>
