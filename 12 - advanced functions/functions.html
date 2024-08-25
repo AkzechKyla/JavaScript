@@ -6,7 +6,10 @@
         <title>Practice Advanced Functions</title>
     </head>
     <body>
+        <button class="add-cart-btn" onclick="added()">Add to cart</button>
+        <p class="added"></p>
         <button class="start-btn" onclick="start()">Start</button>
+
 
         <script>
             const add = function () {
@@ -35,6 +38,25 @@
                 setTimeout(() => {
                     startBtn.innerHTML = 'Finished!';
                 }, 1000)
+            }
+
+            let isClicked = false;
+            let timeoutID;
+
+            function added() {
+                const addMessage = document.querySelector('.added');
+                addMessage.innerHTML = 'Added';
+                console.log('clicked');
+
+                if (isClicked === false) {
+                    timeoutID = setTimeout(() => {
+                        addMessage.innerHTML = '';
+                    }, 2000);
+                    isClicked = true;
+                } else {
+                    clearTimeout(timeoutID);
+                    isClicked = false;
+                }
             }
         </script>
     </body>
