@@ -7,11 +7,19 @@
 </head>
 <body>
     <script>
-        let titleToggle = false;
+//         let titleToggle = false;
+//
+//         setInterval(() => {
+//             document.title = titleToggle ? '(2) New messages' : 'App';
+//             titleToggle = !titleToggle;
+//         }, 1000);
 
         setInterval(() => {
-            document.title = titleToggle ? '(2) New messages' : 'App';
-            titleToggle = !titleToggle;
+            if (document.title === 'App') {
+                document.title = '(2) New messages';
+            } else {
+                document.title = 'App';
+            }
         }, 1000);
     </script>
 </body>
