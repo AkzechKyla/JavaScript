@@ -27,25 +27,13 @@
             console.log(countPositive([-2, 3, -5, 7, 10])); // 3
 
             function addNum(array, num) {
-                let increasedArray = [];
-                array.map((value) => {
-                    increasedArray.push(value + num);
-                })
-                return increasedArray;
+                return array.map((value) => value + num);
             }
 
             console.log(addNum([1, 2, 3], 2));
 
             function removeEgg(foods) {
-                let removedEgg = [];
-
-                foods.filter((food) => {
-                    if (food != 'egg') {
-                        removedEgg.push(food);
-                    }
-                });
-
-                return removedEgg;
+                return foods.filter((food) => food !== 'egg');
             }
 
             console.log(removeEgg(['egg', 'apple', 'egg', 'egg', 'ham']));
