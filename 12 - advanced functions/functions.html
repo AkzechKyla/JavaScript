@@ -40,23 +40,18 @@
                 }, 1000)
             }
 
-            let isClicked = false;
+            // let isClicked = false;
             let timeoutID;
 
             function added() {
                 const addMessage = document.querySelector('.added');
                 addMessage.innerHTML = 'Added';
-                console.log('clicked');
 
-                if (isClicked === false) {
-                    timeoutID = setTimeout(() => {
+                clearTimeout(timeoutID);
+
+                timeoutID = setTimeout(() => {
                         addMessage.innerHTML = '';
                     }, 2000);
-                    isClicked = true;
-                } else {
-                    clearTimeout(timeoutID);
-                    isClicked = false;
-                }
             }
         </script>
     </body>
