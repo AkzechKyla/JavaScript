@@ -33,7 +33,16 @@
             console.log(addNum([1, 2, 3], 2));
 
             function removeEgg(foods) {
-                return foods.filter((food) => food !== 'egg');
+                let eggsRemoved = 0;
+
+                return foods.filter((food) => {
+                    if (food === 'egg' && eggsRemoved < 2) {
+                        eggsRemoved++;
+                        return false;
+                    }
+
+                    return true;
+                });
             }
 
             console.log(removeEgg(['egg', 'apple', 'egg', 'egg', 'ham']));
