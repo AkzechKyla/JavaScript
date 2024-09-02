@@ -1,4 +1,5 @@
 import dayjs from 'https://unpkg.com/dayjs@1.8.9/esm/index.js';
+import isWeekend from './dates.js';
 
 const date = dayjs();
 
@@ -14,12 +15,4 @@ console.log(newdate.format('MMMM D'))
 console.log(date.format('dddd'));
 
 // returns true if the date is Saturday or Sunday
-function isWeekend(date) {
-    if (date.format('dddd') === 'Saturday' ||
-    date.format('dddd') === 'Sunday') {
-        return true;
-    }
-    return false;
-}
-
 console.log(isWeekend(date));
