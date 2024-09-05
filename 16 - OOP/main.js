@@ -9,6 +9,21 @@ const car2 = new Car({
     brand: 'Tesla',
     model: 'Model 3'
 });
-
-console.log(car1);
-console.log(car2);
+car1.go();
+car1.go();
+car1.go();
+car1.go();
+car2.go();
+car2.go();
+car2.go();
+car2.go();
+car1.brake();
+car1.brake();
+car1.brake();
+car1.brake();
+car1.brake();
+car1.brake();
+car2.go();
+car1.go();
+car1.displayInfo();
+car2.displayInfo();
