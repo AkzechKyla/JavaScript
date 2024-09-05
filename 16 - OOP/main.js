@@ -1,29 +1,22 @@
-import {Car} from './car.js';
+import {Car, RaceCar} from './car.js';
 
 const car1 = new Car({
     brand: 'Toyota',
-    model: 'Corolla'
+    model: 'Corolla',
 });
 
 const car2 = new Car({
     brand: 'Tesla',
-    model: 'Model 3'
+    model: 'Model 3',
 });
-car1.go();
-car1.go();
-car1.go();
-car1.go();
-car2.go();
-car2.go();
-car2.go();
-car2.go();
-car1.brake();
-car1.brake();
-car1.brake();
-car1.brake();
-car1.brake();
-car1.brake();
-car2.go();
-car1.go();
-car1.displayInfo();
-car2.displayInfo();
+
+const racecar1 = new RaceCar({
+    brand: 'McLaren',
+    model: 'F1',
+    acceleration: 20,
+});
+
+racecar1.displayInfo();
+racecar1.openTrunk();
+racecar1.go();
+racecar1.displayInfo();
