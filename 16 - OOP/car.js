@@ -3,20 +3,20 @@ export function log() {
 }
 
 export class Car {
-    brand;
-    model;
+    #brand;
+    #model;
     speed = 0;
     isTrunkOpen = false;
     minSpeed = 0;
     maxSpeed = 5;
 
     constructor(carDetails) {
-        this.brand = carDetails.brand;
-        this.model = carDetails.model;
+        this.#brand = carDetails.brand;
+        this.#model = carDetails.model;
     }
 
     displayInfo() {
-        console.log(`${this.brand} ${this.model}, Speed: ${this.speed} km/h\n`);
+        console.log(`${this.#brand} ${this.#model}, Speed: ${this.speed} km/h\n`);
         console.log(`is trunk open: ${this.isTrunkOpen}`);
     }
 
