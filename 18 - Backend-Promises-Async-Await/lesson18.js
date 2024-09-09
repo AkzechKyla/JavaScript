@@ -13,21 +13,29 @@ async function greetingFetch() {
     console.log(greeting);
 }
 
-greetingFetch();
+// greetingFetch();
 
 async function greetingPOST() {
-    const response = await fetch('https://supersimplebackend.dev/greeting', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            name: 'Callie'
-        })
-    });
+    try {
+        const response = await fetch('https://supersimplebackend.dev/greeting', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: ''
+        });
 
-    const greeting = await response.text();
-    console.log(greeting);
+        if (response.status >= 400) throw response;
+
+        const greeting = await response.text();
+        console.log(greeting);
+    } catch(error) {
+        if (error.status === 400) {
+            console.log(await error.json());
+        } else {
+            console.log('Network error. Please try again later.');
+        }
+    }
 }
 
 greetingPOST();
@@ -38,4 +46,4 @@ async function amazonFetch() {
     console.log(greeting);
 }
 
-amazonFetch(); // will cause CORS (Cross-Origin Resource Sharing) error
+// amazonFetch(); // will cause CORS (Cross-Origin Resource Sharing) error
