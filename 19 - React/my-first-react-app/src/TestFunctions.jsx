@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 export function Greeting() {
     return <h1>Shikanoko Nokonoko Koshitantan!</h1>
 }
@@ -37,7 +35,3 @@ function List(props) {
         </ol>
     );
 }
-
-List.propTypes = {
-    members: PropTypes.arrayOf(PropTypes.string).isRequired
-};
