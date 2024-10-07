@@ -31,7 +31,15 @@ export function ShikanokoClub() {
 function List(props) {
     return (
         <ol>
-            {props.members.map((member) => <li key={member}>{member}</li>)}
+            {props.members.map((member) => {
+                return <ListItem key={member} member={member}/>
+            })}
         </ol>
+    );
+}
+
+function ListItem(props) {
+    return (
+        <li>{props.member}</li>
     );
 }
