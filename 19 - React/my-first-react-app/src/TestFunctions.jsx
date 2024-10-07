@@ -33,6 +33,8 @@ function List(props) {
         <ol>
             {props.members.map((member) => {
                 return <ListItem key={member} member={member}/>
+                // return member.startsWith('K') ? <ListItem key={member} member={member}/> : null;
+                // return member.startsWith('K') && <ListItem key={member} member={member}/>;
             })}
         </ol>
     );
