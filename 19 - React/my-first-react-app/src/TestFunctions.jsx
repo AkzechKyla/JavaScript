@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export function Greeting() {
     return <h1>Shikanoko Nokonoko Koshitantan!</h1>
 }
@@ -19,14 +21,23 @@ export function TestFunction() {
 
 export function ShikanokoClub() {
     const members = ["Koshi Torako", "Shikanoko Noko", "Meme Bashame", "Koshi Anko"];
-    const membersList = members.map((member) => <li key={member}>{member}</li>)
 
     return (
         <div>
             <h1>Deer Club Memebers</h1>
-            <ol>
-                {membersList}
-            </ol>
+            <List members={members}/>
         </div>
     );
 }
+
+function List(props) {
+    return (
+        <ol>
+            {props.members.map((member) => <li key={member}>{member}</li>)}
+        </ol>
+    );
+}
+
+List.propTypes = {
+    members: PropTypes.arrayOf(PropTypes.string).isRequired
+};
