@@ -46,13 +46,13 @@ function ListItem(props) {
     );
 }
 
-export function Button(props) {
+export function Button({text, color, fontSize}) {
     const buttonStyle = {
-        color: props.color,
-        fontSize: props.fontSize + 'px'
+        color: color,
+        fontSize: fontSize + 'px'
     };
 
     return (
-        <button style={buttonStyle}>{props.text}</button>
+        <button style={buttonStyle}>{text}</button>
     );
 }
