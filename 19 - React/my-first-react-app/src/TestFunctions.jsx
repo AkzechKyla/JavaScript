@@ -46,13 +46,13 @@ function ListItem(props) {
     );
 }
 
-export function Button({text, color, fontSize}) {
+export function Button({text = "Default", color="white", fontSize="24", handleClick}) {
     const buttonStyle = {
         color: color,
         fontSize: fontSize + 'px'
     };
 
     return (
-        <button style={buttonStyle}>{text}</button>
+        <button onClick={() => handleClick('https://www.theodinproject.com')} style={buttonStyle}>{text}</button>
     );
 }

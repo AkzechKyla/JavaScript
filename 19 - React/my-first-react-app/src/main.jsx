@@ -12,5 +12,6 @@ createRoot(document.getElementById('root')).render(
     <ShikanokoClub />
     <Button text="Click Me!" color="pink" fontSize="24"/>
     <Button text="Don't click me" color="red" fontSize="24"/>
+    <App />
   </StrictMode>,
 )
