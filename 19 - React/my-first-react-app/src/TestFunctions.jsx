@@ -4,10 +4,17 @@ import { useState } from 'react';
 export function Gallery() {
     // let index = 0;
     const [index, setIndex] = useState(0); // index - state variable; setIndex - setter function
+    // let showMore = false;
+    const [showMore, setShowMore] = useState(false);
 
-    function handleClick() {
+    function handleNextClick() {
         // index = index + 1;
         setIndex(index + 1);
+    }
+
+    function handleMoreClick() {
+        // showMore = !showMore
+        setShowMore(!showMore);
     }
 
     let sculpture = sculptureList[index];
@@ -20,9 +27,9 @@ export function Gallery() {
             <img src={sculpture.url} alt={sculpture.alt}></img>
             <h3>({index + 1} of {sculptureList.length})</h3>
             <img></img>
-            <p>{sculpture.description}</p>
-            <button onClick={handleClick}>Next</button>
-
+            <button onClick={handleMoreClick}>{showMore === true ? 'Hide' : 'Show'} details</button>
+            {showMore === true ? <p>{sculpture.description}</p> : null}
+            <button onClick={handleNextClick}>Next</button>
         </>
     );
 }
