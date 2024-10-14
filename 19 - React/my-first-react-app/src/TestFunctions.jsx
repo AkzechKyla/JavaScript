@@ -27,8 +27,9 @@ export function Gallery() {
             <img src={sculpture.url} alt={sculpture.alt}></img>
             <h3>({index + 1} of {sculptureList.length})</h3>
             <img></img>
-            <button onClick={handleMoreClick}>{showMore === true ? 'Hide' : 'Show'} details</button>
-            {showMore === true ? <p>{sculpture.description}</p> : null}
+            <button onClick={handleMoreClick}>{showMore ? 'Hide' : 'Show'} details</button>
+            {/* {showMore === true ? <p>{sculpture.description}</p> : null} */}
+            {showMore && <p>{sculpture.description}</p>}
             <button onClick={handleNextClick}>Next</button>
         </>
     );
