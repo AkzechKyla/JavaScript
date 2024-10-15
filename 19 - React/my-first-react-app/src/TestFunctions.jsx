@@ -1,6 +1,24 @@
 import { sculptureList } from './sculpture.js';
 import { useState } from 'react';
 
+export function Form() {
+    let firstName = 'Kyla';
+    let lastName = 'Morcillos';
+
+    return(
+        <form>
+            <input
+                placeholder='First name'
+                value={firstName}
+            />
+            <input
+                placeholder='Last name'
+                value={lastName}
+            />
+        </form>
+    );
+}
+
 export function Gallery() {
     // let index = 0;
     const [index, setIndex] = useState(0); // index - state variable; setIndex - setter function

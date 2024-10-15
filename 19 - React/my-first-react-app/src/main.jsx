@@ -1,12 +1,13 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
-import {Greeting, ShikanokoClub, Button, Gallery} from './TestFunctions.jsx'
+import {Greeting, ShikanokoClub, Button, Gallery, Form} from './TestFunctions.jsx'
 import {ShikairoDaysGIF} from './Media.jsx';
 import './index.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <Form />
     <Greeting />
     <ShikairoDaysGIF />
     <ShikanokoClub />
