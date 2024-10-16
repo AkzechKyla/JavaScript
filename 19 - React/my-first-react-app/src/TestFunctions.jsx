@@ -2,19 +2,42 @@ import { sculptureList } from './sculpture.js';
 import { useState } from 'react';
 
 export function Form() {
-    let firstName = 'Kyla';
-    let lastName = 'Morcillos';
+    // let firstName = 'Kyla';
+    let [firstName, setFirstName] = useState('');
+    // let lastName = 'Morcillos';
+    let [lastName, setLastName] = useState('')
+
+    function handleFirstName(e) {
+        setFirstName(e.target.value)
+        // firstName = e.target.value;
+    }
+
+    function handleLastName(e) {
+        setLastName(e.target.value);
+        // lastName = e.target.value;
+    }
+
+    function handleReset() {
+        firstName = '';
+        lastName = '';
+    }
 
     return(
         <form>
             <input
+                type="text"
                 placeholder='First name'
                 value={firstName}
+                onChange={handleFirstName}
             />
             <input
+                type="text"
                 placeholder='Last name'
                 value={lastName}
+                onChange={handleLastName}
             />
+            <h1>Hi, {firstName} {lastName}!</h1>
+            <button onClick={handleReset}>Reset</button>
         </form>
     );
 }
