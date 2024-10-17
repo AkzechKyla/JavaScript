@@ -1,6 +1,38 @@
 import { sculptureList } from './sculpture.js';
 import { useState } from 'react';
 
+function Panel({ title, children }) {
+  const [isActive, setIsActive] = useState(false);
+
+  return (
+    <section className="panel">
+      <h3>{title}</h3>
+      {isActive ? (
+        <p>{children}</p>
+      ) : (
+        <button onClick={() => setIsActive(true)}>
+          Show
+        </button>
+      )}
+    </section>
+  );
+}
+
+export function Accordion() {
+  return (
+    <>
+      <h2>Almaty, Kazakhstan</h2>
+      <Panel title="About">
+        With a population of about 2 million, Almaty is Kazakhstan's largest city. From 1929 to 1997, it was its capital city.
+      </Panel>
+      <Panel title="Etymology">
+        The name comes from <span lang="kk-KZ">алма</span>, the Kazakh word for "apple" and is often translated as "full of apples". In fact, the region surrounding Almaty is thought to be the ancestral home of the apple, and the wild <i lang="la">Malus sieversii</i> is considered a likely candidate for the ancestor of the modern domestic apple.
+      </Panel>
+    </>
+  );
+}
+
+
 export function Form() {
     // let firstName = 'Kyla';
     let [firstName, setFirstName] = useState('');
@@ -76,12 +108,13 @@ export function Gallery() {
             <h2>
                 <i>{sculpture.name}</i> by {sculpture.artist}
             </h2>
-            <img src={sculpture.url} alt={sculpture.alt}></img>
+            <Panel title={sculpture.name}><img src={sculpture.url} alt={sculpture.alt}></img></Panel>
+            {/* <img src={sculpture.url} alt={sculpture.alt}></img> */}
             <h3>({index + 1} of {sculptureList.length})</h3>
-            <img></img>
-            <button onClick={handleMoreClick}>{showMore ? 'Hide' : 'Show'} details</button>
+            {/* <button onClick={handleMoreClick}>{showMore ? 'Hide' : 'Show'} details</button> */}
             {/* {showMore === true ? <p>{sculpture.description}</p> : null} */}
-            {showMore && <p>{sculpture.description}</p>}
+            {/* {showMore && <p>{sculpture.description}</p>} */}
+            <Panel title={sculpture.name}><p>{sculpture.description}</p></Panel>
             <button onClick={handlePrevClick} disabled={!hasPrev}>Prev</button>
             <button onClick={handleNextClick} disabled={!hasNext}>Next</button>
         </>
