@@ -1,6 +1,8 @@
 function App() {
   return (
-    <div>CCIS Concern Hub Prototype</div>
+    <div className="text-3xl font-bold underline">
+      CCIS Concern Hub Prototype
+    </div>
   )
 }
 
