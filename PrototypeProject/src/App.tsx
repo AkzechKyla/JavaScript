@@ -1,6 +1,11 @@
+import {LoginButton} from './components/login'
+
 function App() {
   return(
-    <p>CCIS Concern Hub Prototype</p>
+    <div>
+      <p>CCIS Concern Hub Prototype</p>
+      <LoginButton/>
+    </div>
   )
 }
 
