@@ -1,13 +1,13 @@
-import {auth, provider, signInWithPopup} from '../services/auth'
+import User from '../models/user';
+import { useState } from 'react';
 
 export function LoginButton() {
+    const [user, setUser] = useState(null);
+    const userInstance = new User();
+
     const signInWithGoogle = async () => {
-        try {
-          const result = await signInWithPopup(auth, provider);
-          console.log(result.user);
-        } catch (error) {
-          console.error("Error signing in with Google: ", error);
-        }
+        userInstance.signInWithGoogle();
+        setUser(userInstance.getUser());
     };
 
     return(
