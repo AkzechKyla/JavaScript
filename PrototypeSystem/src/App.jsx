@@ -1,13 +1,15 @@
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import {LoginButton} from './components/login'
+import {SignIn} from './pages/signin'
 
 function App() {
   return (
-    <>
-      <div className="text-3xl font-bold underline">
-        CCIS Concern Hub Prototype
-      </div>
-      <LoginButton/>
-    </>
+    <Router>
+      <Routes>
+        <Route path='/' element={<SignIn/>} />
+        <Route path='/home' element={<LoginButton/>} />
+      </Routes>
+    </Router>
   )
 }
 
