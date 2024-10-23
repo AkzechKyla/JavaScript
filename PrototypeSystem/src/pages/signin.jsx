@@ -1,17 +1,16 @@
-import User from '../models/user';
+import ClientUser from '../auth/clientUser';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function SignIn() {
     const [user, setUser] = useState(null);
-    const userInstance = new User();
+    const navigate = useNavigate();
+    const clientUser = new ClientUser();
 
     const signInWithGoogle = async () => {
-        userInstance.signInWithGoogle();
-        setUser(userInstance.getUser());
-
-        if (userInstance.getUserRole() == 'admin') {
-            console.log('this is an admin');
-        }
+        await clientUser.signInWithGoogle();
+        setUser(clientUser.getUser());
+        navigate('/select-portal');
     };
 
     return(
