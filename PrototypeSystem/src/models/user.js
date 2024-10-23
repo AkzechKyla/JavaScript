@@ -1,4 +1,4 @@
-import {auth, provider} from '../services/auth';
+import {auth, provider} from '../auth/auth';
 import {signInWithPopup} from "firebase/auth";
 
 class User {
