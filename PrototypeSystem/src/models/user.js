@@ -4,6 +4,11 @@ import {signInWithPopup} from "firebase/auth";
 class User {
     constructor() {
         this.user = null;
+        this.userRole = 'admin';
+    }
+
+    getUserRole() {
+        return this.userRole;
     }
 
     getUser() {
