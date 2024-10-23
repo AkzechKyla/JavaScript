@@ -31,11 +31,6 @@ class User {
     isAdmin() {
         return this.roles.includes('admin');
     }
-
-    // Method to check if the user has both roles
-    hasDualRole() {
-        return this.isStudent() && this.isAdmin();
-    }
 }
 
 export default User;

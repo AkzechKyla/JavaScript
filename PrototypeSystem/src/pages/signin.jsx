@@ -5,15 +5,15 @@ import { useNavigate } from 'react-router-dom';
 export function SignIn() {
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
-    const clientUser = new ClientUser();
+    const firebaseUser = new ClientUser();
 
     const signInWithGoogle = async () => {
-        await clientUser.signInWithGoogle();
-        const userData = await clientUser.getUserFromDatabase();
+        await firebaseUser.signInWithGoogle();
+        const userData = await firebaseUser.getUserFromDatabase();
         setUser(userData);
 
         // Redirect based on the user role
-        if (userData.hasDualRole()) {
+        if (userData.isAdmin() && userData.isStudent()) {
             navigate('/select-portal');
         } else if (userData.isAdmin()) {
             // navigate('/admin-dashboard');
