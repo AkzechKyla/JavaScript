@@ -1,5 +1,6 @@
 import {auth, provider} from '../auth/auth';
 import {signInWithPopup} from "firebase/auth";
+import User from '../models/user';
 
 class ClientUser {
     constructor() {

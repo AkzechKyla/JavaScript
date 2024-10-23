@@ -9,8 +9,19 @@ export function SignIn() {
 
     const signInWithGoogle = async () => {
         await clientUser.signInWithGoogle();
-        setUser(clientUser.getUser());
-        navigate('/select-portal');
+        const userData = await clientUser.getUserFromDatabase();
+        setUser(userData);
+
+        // Redirect based on the user role
+        if (userData.hasDualRole()) {
+            navigate('/select-portal');
+        } else if (userData.isAdmin()) {
+            // navigate('/admin-dashboard');
+            console.log('admin dashboard');
+        } else if (userData.isStudent()) {
+            // navigate('/student-dashboard');
+            console.log('student dashboard');
+        }
     };
 
     return(
