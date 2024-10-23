@@ -21,6 +21,18 @@ class ClientUser {
             console.error('Error signing in with Google:', error);
         }
     }
+
+    // Method to get corresponding User class from the database
+    async getUserFromDatabase() {
+        if (!this.clientUser) {
+            throw new Error("No Firebase user authenticated");
+        }
+
+        const email = this.clientUser.email;
+        const user = await User.findByEmail(email);
+        console.log(user);
+        return user;
+    }
 }
 
 export default ClientUser;

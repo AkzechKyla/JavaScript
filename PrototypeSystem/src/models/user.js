@@ -1,25 +1,40 @@
-import {auth, provider} from '../auth/auth';
-import {signInWithPopup} from "firebase/auth";
-
 class User {
-    constructor() {
-        this.user = null;
-        this.userRole = 'admin';
+    constructor(email, roles = ['student']) {
+        this.email = email;
+        this.roles = roles;
     }
 
-    getUserRole() {
-        return this.userRole;
+    // Mock method to simulate fetching user data from the database
+    static async findByEmail(email) {
+        const mockDatabase = [
+            { email: 'kflmorcillos@gmail.com', roles: ['student'] },
+            { email: 'clownfish0123@gmail.com', roles: ['admin'] },
+            { email: 'fionamorcillos41@gmail.com', roles: ['student', 'admin'] }
+        ];
+
+        console.log(email);
+
+        const userData = mockDatabase.find(user => user.email === email);
+        if (userData) {
+            return new User(userData.email, userData.roles);
+        } else {
+            throw new Error('User not found in the database');
+        }
     }
 
-    getUser() {
-        return this.user;
+    // Method to check if the user is a student
+    isStudent() {
+        return this.roles.includes('student');
     }
 
-    async signInWithGoogle() {
-        const result = await signInWithPopup(auth, provider);
-        this.user = result.user;
+    // Method to check if the user is an admin
+    isAdmin() {
+        return this.roles.includes('admin');
+    }
 
-        console.log('User signed in:', this.user);
+    // Method to check if the user has both roles
+    hasDualRole() {
+        return this.isStudent() && this.isAdmin();
     }
 }
 
