@@ -1,4 +1,4 @@
-export function Home() {
+function LandingPage() {
     return(
         <div>
             <p>CCIS Concern Hub</p>
@@ -7,3 +7,5 @@ export function Home() {
         </div>
     )
 }
+
+export default LandingPage;
