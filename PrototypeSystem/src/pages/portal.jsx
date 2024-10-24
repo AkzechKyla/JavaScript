@@ -1,6 +1,4 @@
-import { useState } from 'react';
-
-export function Portal() {
+function Portal() {
     return(
         <div>
             <p>Welcome</p>
@@ -10,3 +8,5 @@ export function Portal() {
         </div>
     )
 }
+
+export default Portal;

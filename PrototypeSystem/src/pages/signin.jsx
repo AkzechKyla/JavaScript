@@ -2,7 +2,7 @@ import ClientUser from '../auth/clientUser';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export function SignIn() {
+function SignIn() {
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
     const firebaseUser = new ClientUser();
@@ -32,3 +32,5 @@ export function SignIn() {
         </div>
     )
 }
+
+export default SignIn;
