@@ -3,14 +3,17 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function SignIn() {
-    const [user, setUser] = useState(null);
+    const [clientUser, setClientUser] = useState(null);
     const navigate = useNavigate();
-    const firebaseUser = new ClientUser();
 
-    const signIn = async () => {
-        await firebaseUser.signIn();
-        const userData = await firebaseUser.getUserFromDatabase();
-        setUser(userData);
+    async function signInWithMicrosoft() {
+        try {
+            setClientUser(await ClientUser.signInWithMicrosoft());
+        } catch {
+            setClientUser(null);  // If sign in failed, set client user as null
+        }
+
+        const userData = await clientUser.getUserFromDatabase();
 
         // Redirect based on the user role
         if (userData.isAdmin() && userData.isStudent()) {
@@ -22,13 +25,13 @@ function SignIn() {
             // navigate('/student-dashboard');
             console.log('student dashboard');
         }
-    };
+    }
 
     return(
         <div>
             <p>Welcome</p>
             <p>Please log in or sign in below</p>
-            <button onClick={signIn}>Login with Google</button>
+            <button onClick={signInWithMicrosoft}>Login with Google</button>
         </div>
     )
 }
