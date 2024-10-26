@@ -12,7 +12,7 @@ class ClientUser {
     }
 
     // Method to sign in with Google and set clientUser
-    async signInWithGoogle() {
+    async signIn() {
         try {
             const result = await signInWithPopup(auth, provider);
             this.clientUser = result.user;

@@ -7,8 +7,8 @@ function SignIn() {
     const navigate = useNavigate();
     const firebaseUser = new ClientUser();
 
-    const signInWithGoogle = async () => {
-        await firebaseUser.signInWithGoogle();
+    const signIn = async () => {
+        await firebaseUser.signIn();
         const userData = await firebaseUser.getUserFromDatabase();
         setUser(userData);
 
@@ -28,7 +28,7 @@ function SignIn() {
         <div>
             <p>Welcome</p>
             <p>Please log in or sign in below</p>
-            <button onClick={signInWithGoogle}>Login with Google</button>
+            <button onClick={signIn}>Login with Google</button>
         </div>
     )
 }
