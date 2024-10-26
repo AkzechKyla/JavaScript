@@ -7,13 +7,16 @@ function SignIn() {
     const navigate = useNavigate();
 
     async function signInWithMicrosoft() {
+        let signedInUser;
+
         try {
-            setClientUser(await ClientUser.signInWithMicrosoft());
+            signedInUser = await ClientUser.signInWithMicrosoft();
+            setClientUser(signedInUser);
         } catch {
             setClientUser(null);  // If sign in failed, set client user as null
         }
 
-        const userData = await clientUser.getUserFromDatabase();
+        const userData = await signedInUser.getUserFromDatabase();
 
         // Redirect based on the user role
         if (userData.isAdmin() && userData.isStudent()) {
