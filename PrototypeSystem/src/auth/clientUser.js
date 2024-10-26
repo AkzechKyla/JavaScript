@@ -3,33 +3,19 @@ import {signInWithPopup} from "firebase/auth";
 import User from '../models/user';
 
 class ClientUser {
-    constructor() {
-        this.clientUser = null; // Stores Firebase authenticated user
+    // Method to sign in with Google
+    static async signInWithMicrosoft() {
+        const result = await signInWithPopup(auth, provider);
+        return new ClientUser(result.user);
     }
 
-    getUser() {
-        return this.clientUser;
-    }
-
-    // Method to sign in with Google and set clientUser
-    async signIn() {
-        try {
-            const result = await signInWithPopup(auth, provider);
-            this.clientUser = result.user;
-
-            console.log('Client user signed in:', this.clientUser);
-        } catch (error) {
-            console.error('Error signing in with Google:', error);
-        }
+    constructor(firebaseUser) {
+        this.firebaseUser = firebaseUser; // Stores Firebase authenticated user
     }
 
     // Method to get corresponding User class from the database
     async getUserFromDatabase() {
-        if (!this.clientUser) {
-            throw new Error("No Firebase user authenticated");
-        }
-
-        const email = this.clientUser.email;
+        const email = this.firebaseUser.email;
         const user = await User.findByEmail(email);
         console.log(user);
         return user;
