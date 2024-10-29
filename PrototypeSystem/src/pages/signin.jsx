@@ -22,8 +22,7 @@ function SignIn() {
         if (userData.isAdmin() && userData.isStudent()) {
             navigate('/select-portal');
         } else if (userData.isAdmin()) {
-            // navigate('/admin-dashboard');
-            console.log('admin dashboard');
+            navigate('/admin-dashboard');
         } else if (userData.isStudent()) {
             // navigate('/student-dashboard');
             console.log('student dashboard');
@@ -34,7 +33,7 @@ function SignIn() {
         <div>
             <p>Welcome</p>
             <p>Please log in or sign in below</p>
-            <button onClick={signInWithMicrosoft}>Login with Google</button>
+            <button onClick={signInWithMicrosoft}>Sign in with PUP Webmail</button>
         </div>
     )
 }
