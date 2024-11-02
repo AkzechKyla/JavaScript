@@ -41,13 +41,18 @@ function SignIn() {
     await signInWithPopup(auth, provider);
   }
 
-  return(
-    <button onClick={signInWithGoogle}>Sign in with Google</button>
-  )
+  return <button onClick={signInWithGoogle}>Sign in with Google</button>;
+}
+
+function SignOut() {
+  return <button onClick={() => auth.signOut()}>Log Out</button>;
 }
 
 function ChatRoom() {
-  return <div>Welcome to the chat!</div>;
+  return <>
+    <div>Welcome to the chat!</div>
+    <SignOut />
+  </>;
 }
 
 export default App
