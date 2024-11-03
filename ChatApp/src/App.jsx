@@ -4,8 +4,8 @@ import 'firebase/auth'
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth'
-// import { getFirestore } from 'firebase/firestore';
-// import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { getFirestore, collection, query, orderBy, limit } from 'firebase/firestore';
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -20,7 +20,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-// const firestore = getFirestore(app);
+const firestore = getFirestore(app);
 
 function App() {
   const [user] = useAuthState(auth);
@@ -49,8 +49,18 @@ function SignOut() {
 }
 
 function ChatRoom() {
+  const messagesRef = collection(firestore, 'messages');
+  const q = query(messagesRef, orderBy('createdAt'), limit(25))
+
+  const [messages] = useCollectionData(q, {idField: 'id'});
+
   return <>
     <div>Welcome to the chat!</div>
+
+    <div>
+      {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg}/>)}
+    </div>
+
     <SignOut />
   </>;
 }
