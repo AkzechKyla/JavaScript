@@ -45,7 +45,9 @@ function SignIn() {
 }
 
 function SignOut() {
-  return <button onClick={() => auth.signOut()}>Log Out</button>;
+  return auth.currentUser && (
+    <button onClick={() => auth.signOut()}>Log Out</button>
+  )
 }
 
 function ChatRoom() {
