@@ -1,10 +1,8 @@
-import 'firebase/firestore'
-import 'firebase/auth'
-
+import { useState } from "react";
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { useAuthState } from 'react-firebase-hooks/auth'
-import { getFirestore, collection, query, orderBy, limit } from 'firebase/firestore';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { getFirestore, collection, query, orderBy, limit, addDoc, serverTimestamp } from 'firebase/firestore';
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 // Your web app's Firebase configuration
@@ -56,12 +54,31 @@ function ChatRoom() {
 
   const [messages] = useCollectionData(q, {idField: 'id'});
 
-  return <>
-    <div>Welcome to the chat!</div>
+  const [formValue, setFormValue] = useState('');
 
+  const sendMessage = async(e) => {
+    e.preventDefault(); // dont refresh the page
+
+    const {uid} = auth.currentUser;
+
+    await addDoc(messagesRef, {
+      text: formValue,
+      createdAt: serverTimestamp(),
+      uid
+    })
+
+    setFormValue('');
+  }
+
+  return <>
     <div>
       {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg}/>)}
     </div>
+
+    <form onSubmit={sendMessage}>
+      <input value={formValue} onChange={(e) => setFormValue(e.target.value)} />
+      <button type='submit'>Submit</button>
+    </form>
 
     <SignOut />
   </>;
