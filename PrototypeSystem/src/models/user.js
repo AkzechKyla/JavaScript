@@ -8,7 +8,7 @@ class User {
     static async findByEmail(email) {
         const mockDatabase = [
             { email: 'kflmorcillos@gmail.com', roles: ['student'] },
-            { email: 'clownfish0123@gmail.com', roles: ['admin'] },
+            { email: 'kylafranchezkalmorcillos@iskolarngbayan.pup.edu.ph', roles: ['admin'] },
             { email: 'fionamorcillos41@gmail.com', roles: ['student', 'admin'] }
         ];
 

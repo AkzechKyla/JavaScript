@@ -1,22 +1,24 @@
 import ClientUser from '../auth/clientUser';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function SignIn() {
-    const [clientUser, setClientUser] = useState(null);
+function SignIn({ setAuthenticatedUser }) {
     const navigate = useNavigate();
 
     async function signInWithMicrosoft() {
         let signedInUser;
+        let userData;
 
         try {
             signedInUser = await ClientUser.signInWithMicrosoft();
-            setClientUser(signedInUser);
-        } catch {
-            setClientUser(null);  // If sign in failed, set client user as null
-        }
 
-        const userData = await signedInUser.getUserFromDatabase();
+            if (signedInUser) {
+                userData = await signedInUser.getUserFromDatabase();
+                setAuthenticatedUser(signedInUser);
+            }
+
+        } catch {
+            setAuthenticatedUser(null);  // If sign in failed, set client user as null
+        }
 
         // Redirect based on the user role
         if (userData.isAdmin() && userData.isStudent()) {
