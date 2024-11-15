@@ -3,7 +3,7 @@ import Registration from './pages/registration'
 
 function App() {
   return (
-    <Registration />
+    <QuizPage />
   )
 }
 
