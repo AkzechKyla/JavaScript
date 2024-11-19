@@ -45,7 +45,7 @@ const SignupForm = () => {
             <label className="block text-[#B5BAC1] font-medium">Full Name</label>
             <input
               type="text"
-              className="w-full px-4 py-2 border rounded-md bg-[#1e2124] text-gray-300"
+              className="w-full px-4 py-2 border-0 rounded-md bg-[#1e2124] text-gray-300 focus:outline-none"
               value={fullname}
               onChange={(e) => setFullname(e.target.value)}
               required
@@ -55,7 +55,7 @@ const SignupForm = () => {
             <label className="block text-[#B5BAC1]">Email Address</label>
             <input
               type="email"
-              className="w-full px-4 py-2 border rounded-md bg-[#1e2124] text-gray-300"
+              className="w-full px-4 py-2 border-0 rounded-md bg-[#1e2124] text-gray-300 focus:outline-none"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -65,7 +65,7 @@ const SignupForm = () => {
             <label className="block text-[#B5BAC1]">Password</label>
             <input
               type="password"
-              className="w-full px-4 py-2 border rounded-md bg-[#1e2124] text-gray-300"
+              className="w-full px-4 py-2 border-0 rounded-md bg-[#1e2124] text-gray-300 focus:outline-none"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -75,7 +75,7 @@ const SignupForm = () => {
             <label className="block text-[#B5BAC1]">Confirm Password</label>
             <input
               type="password"
-              className="w-full px-4 py-2 border rounded-md bg-[#1e2124] text-gray-300"
+              className="w-full px-4 py-2 border-0 rounded-md bg-[#1e2124] text-gray-300 focus:outline-none"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
@@ -83,7 +83,7 @@ const SignupForm = () => {
           </div>
           <button
             type="submit"
-            className="mt-4 w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300"
+            className="mt-4 w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300 focus:outline-none"
           >
             Sign Up
           </button>
