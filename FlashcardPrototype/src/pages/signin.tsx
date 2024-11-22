@@ -69,7 +69,7 @@ const SigninForm = () => {
           </button>
         </form>
         <div className="mt-4 text-center">
-          <a href="/signin" className="text-blue-500">Need an account? Sign Up</a>
+          <a href="/" className="text-blue-500">Need an account? Sign Up</a>
         </div>
       </div>
     </div>
