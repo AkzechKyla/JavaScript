@@ -1,0 +1,1 @@
+here lies my javascript codes for learning purposes + prototypes of projects I'm working on
