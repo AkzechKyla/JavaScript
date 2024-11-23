@@ -7,8 +7,9 @@ const SigninForm = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   // need to remove some unnecessary codes since this came from sign up form
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
     if (password !== confirmPassword) {
       alert('Passwords do not match!');
       return;
