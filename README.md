@@ -1,1 +1,1 @@
-here lies my javascript codes for learning purposes + prototypes of projects I'm working on
+Here lies my JavaScript codes for learning purposes, along with prototypes of the projects I'm working on.
