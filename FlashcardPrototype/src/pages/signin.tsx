@@ -1,35 +1,50 @@
 import { useState } from 'react';
 
 const SigninForm = () => {
-  const [fullname, setFullname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const mockApiResponse = (email: string, password: string) => {
+    // Simulate a successful login for a specific email and password
+    if (email === "test@example.com" && password === "password123") {
+      return { ok: true, message: "Login successful!" };
+    } else {
+      return { ok: false, message: "Invalid email or password." };
+    }
+  };
 
   // need to remove some unnecessary codes since this came from sign up form
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (password !== confirmPassword) {
-      alert('Passwords do not match!');
+    // if (password !== confirmPassword) {
+    //   alert('Passwords do not match!');
+    //   return;
+    // }
+
+    if (!email || !password) {
+      alert("Please fill in both fields.");
       return;
     }
 
     try {
-      const response = await fetch('http://localhost:1337/api/auth/local/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          username: fullname,
-          email,
-          password,
-        }),
-      });
-      const data = await response.json();
+      // const response = await fetch('http://localhost:1337/api/auth/local/register', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({
+      //     email,
+      //     password,
+      //   }),
+      // });
+      // const data = await response.json();
+
+      const response = mockApiResponse(email, password);
+
       if (response.ok) {
         alert('Signup successful!');
       } else {
-        alert(data.message[0].messages[0].message);
+        // alert(data.message[0].messages[0].message);
+        alert(response.message)
       }
     } catch (error) {
       console.error('Error signing up:', error);
