@@ -1,36 +1,38 @@
-class User {
-    constructor(email, roles = ['student']) {
-        this.email = email;
+import Database from "../services/database";
+
+export default class User {
+    static async findByUid(uid) {
+        const userData = await Database.getUserData(uid);
+        return userData ? new User(userData) : null;
+    }
+
+    static async new(uid, displayName) {
+        const userData = {
+            uid: uid,
+            displayName: displayName,
+            roles: ["student"],
+            assignedCategories: null,
+        };
+        await Database.setUserData(uid, userData);
+        return new User(userData);
+    }
+
+    constructor({ uid, displayName, roles, assignedCategories = null }) {
+        this.uid = uid;
+        this.displayName = displayName;
         this.roles = roles;
+        this.assignedCategories = assignedCategories;
     }
 
-    // Mock method to simulate fetching user data from the database
-    static async findByEmail(email) {
-        const mockDatabase = [
-            { email: 'kflmorcillos@gmail.com', roles: ['student'] },
-            { email: 'kylafranchezkalmorcillos@iskolarngbayan.pup.edu.ph', roles: ['admin'] },
-            { email: 'fionamorcillos41@gmail.com', roles: ['student', 'admin'] }
-        ];
-
-        console.log(email);
-
-        const userData = mockDatabase.find(user => user.email === email);
-        if (userData) {
-            return new User(userData.email, userData.roles);
-        } else {
-            throw new Error('User not found in the database');
-        }
+    getAvatarUrl() {
+        return `https://api.dicebear.com/9.x/initials/svg?seed=${this.displayName}`;
     }
 
-    // Method to check if the user is a student
     isStudent() {
         return this.roles.includes('student');
     }
 
-    // Method to check if the user is an admin
     isAdmin() {
         return this.roles.includes('admin');
     }
 }
-
-export default User;
