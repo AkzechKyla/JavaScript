@@ -3,8 +3,8 @@ import Database from "../services/database";
 import Storage from '../services/storage';
 
 export default class Concern {
-    constructor({ attachmentLinks, category, creatorUid, dateSubmitted, description, uid, isResolved = false, isSpam = false, issueType, status = 'Open', subject }) {
-        this.attachmentLinks = attachmentLinks;
+    constructor({ attachments, category, creatorUid, dateSubmitted, description, uid, isResolved = false, isSpam = false, issueType, status = 'Open', subject }) {
+        this.attachments = attachments;
         this.category = category;
         this.creatorUid = creatorUid;
         this.dateSubmitted = dateSubmitted instanceof Timestamp ? dateSubmitted.toDate() : new Date(dateSubmitted);
@@ -36,7 +36,7 @@ export default class Concern {
 
     toJSON() {
         return {
-            attachmentLinks: this.attachmentLinks,
+            attachments: this.attachments,
             category: this.category,
             creatorUid: this.creatorUid,
             dateSubmitted: this.dateSubmitted,
