@@ -50,34 +50,21 @@ export default class Concern {
         };
     }
 
+    async _uploadFile(file) {
+        const dlUrl = await Storage.uploadFile(file, `concerns/${this.uid}/${file.name}`);
+        this.attachments.push({
+            name: file.name,
+            url: dlUrl,
+        });
+    }
+
     async uploadAttachments(files) {
         const promises = [];
 
         for (const file of files) {
-            const p = Storage.uploadFile(file, `concerns/${this.uid}/${file.name}`);
-            promises.push(p);
+            promises.push(this._uploadFile(file));
         }
 
         await Promise.all(promises);
-    }
-
-    async fetchAttachments(path) {
-        return await Storage.retrieveFiles(path);
-    }
-
-    async setAttachmentLinks(files, path) {
-        const promises = [];
-
-        for (const file of files.items) {
-            const url = await Storage.getDownloadURL(file, `${path}/${file.name}`);
-            promises.push(url);
-        }
-
-        this.attachmentLinks = await Promise.all(promises);
-        console.log(this.attachmentLinks);
-    }
-
-    getAttachmentLinks() {
-        return this.attachmentLinks;
     }
 }
