@@ -11,7 +11,7 @@ export function Portal() {
     };
 
     const handleAdminClick = () => {
-        navigate('/admin-dashboard');
+        navigate('/admin-workspace');
     };
 
     return (

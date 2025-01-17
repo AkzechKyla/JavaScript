@@ -10,7 +10,7 @@ async function navigateBasedOnRole(clientUser, navigate) {
     if (userData.isAdmin() && userData.isStudent()) {
         navigate("/portal");
     } else if (userData.isAdmin()) {
-        navigate("/admin-dashboard");
+        navigate("/admin-workspace");
     } else if (userData.isStudent()) {
         navigate("/my-concerns");
     }
