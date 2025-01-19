@@ -1,9 +1,11 @@
 import { Timestamp } from "firebase/firestore";
 import Database from "../services/database";
 import Storage from '../services/storage';
+import Discussion from './discussion';
 
 export default class Concern {
-    constructor({ attachments, category, creatorUid, dateSubmitted, description, uid, isResolved = false, isSpam = false, issueType, status = 'Open', subject }) {
+    constructor({ assignedAdmins, attachments, category, creatorUid, dateSubmitted, description, uid, isResolved = false, isSpam = false, issueType, status = 'Open', subject, hasDiscussion = false, hasBeenResolvedByCreator = false, hasBeenResolvedByAdmin = false, recentActivityDate }) {
+        this.assignedAdmins = assignedAdmins;
         this.attachments = attachments;
         this.category = category;
         this.creatorUid = creatorUid;
@@ -15,6 +17,11 @@ export default class Concern {
         this.issueType = issueType;
         this.status = status;
         this.subject = subject;
+        this.hasDiscussion = hasDiscussion;
+        this.discussion = new Discussion(this.uid);
+        this.hasBeenResolvedByCreator = hasBeenResolvedByCreator;
+        this.hasBeenResolvedByAdmin = hasBeenResolvedByAdmin;
+        this.recentActivityDate = recentActivityDate instanceof Timestamp ? recentActivityDate.toDate() : new Date(recentActivityDate);
     }
 
     async saveToDatabase() {
@@ -36,6 +43,7 @@ export default class Concern {
 
     toJSON() {
         return {
+            assignedAdmins: this.assignedAdmins,
             attachments: this.attachments,
             category: this.category,
             creatorUid: this.creatorUid,
@@ -47,6 +55,9 @@ export default class Concern {
             issueType: this.issueType,
             status: this.status,
             subject: this.subject,
+            hasDiscussion: this.hasDiscussion,
+            hasBeenResolvedByCreator: this.hasBeenResolvedByCreator,           hasBeenResolvedByAdmin: this.hasBeenResolvedByAdmin,
+            recentActivityDate: this.recentActivityDate,
         };
     }
 
@@ -66,5 +77,50 @@ export default class Concern {
         }
 
         await Promise.all(promises);
+    }
+
+    updateStatus(newStatus) {
+        this.status = newStatus;
+    }
+
+    isAdminAssigned(userData) {
+        return this.assignedAdmins.find(admin => admin.uid === userData.uid);
+    }
+
+    assignAdmin(userData) {
+        this.assignedAdmins.push({
+            uid: userData.uid,
+            name: userData.displayName,
+        });
+    }
+
+    unassignAdmin(userData) {
+        this.assignedAdmins = this.assignedAdmins.filter(
+            admin => admin.uid !== userData.uid
+        );
+    }
+
+    setIsSpam(isSpam) {
+        this.isSpam = isSpam;
+    }
+
+    getDateSubmitted() {
+        return this.dateSubmitted;
+    }
+
+    setHasDiscussion(hasDiscussion) {
+        this.hasDiscussion = hasDiscussion;
+    }
+
+    setAsResolved(status, concernCreator, userData) {
+        if (concernCreator === userData) {
+            this.hasBeenResolvedByCreator = true;
+            this.updateStatus(status);
+            this.isResolved = true;
+        } else {
+            this.hasBeenResolvedByAdmin = true;
+        }
+
+        this.isSpam = false;
     }
 }
