@@ -1,54 +1,28 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useState, useEffect } from "react";
 import Footer from '../components/footer';
 import ConcernList from '../components/concernList';
 import WorkspaceStats from '../components/workspaceStats';
-import Database, { Pagination } from '../services/database';
-import LoadingSpinner from '../components/loading';
+import { ConcernsFilter } from '../services/database';
 
-export function AdminWorkspace({ userData }) {
-    const [concerns, setConcerns] = useState(undefined);
-    const pagination = useRef(new Pagination(5));
-
-    const fetchCategoryConcerns = useCallback(async () => {
-        if (userData) {
-            const categoryConcerns = await Database.getCategoryConcerns(userData.assignedCategories, pagination.current)
-
-            if (concerns === undefined) {
-                setConcerns(categoryConcerns);
-            } else {
-                setConcerns([...concerns, ...categoryConcerns]);
-            }
-        }
-    }, [userData, concerns]);
+export default function AdminWorkspace({ userData }) {
+    const [concernsFilter, setConcernsFilter] = useState(null);
 
     useEffect(() => {
-        fetchCategoryConcerns();
-    }, [fetchCategoryConcerns]);
-
-    // Dummy metrics data
-    const metricsData = {
-        open: 5,
-        inProgress: 3,
-        onHold: 2,
-        resolved: 10,
-        unresolved: 1,
-        totalConcerns: 21,
-    };
+        if (userData) {
+            const filter = new ConcernsFilter().categoryIn(userData.assignedCategories);
+            setConcernsFilter(filter);
+        }
+    }, [userData]);
 
     return (
         <div>
             <main className="container mx-auto p-4">
                 <h2 className="text-2xl font-semibold mt-2 text-blue-400">Concern Overview</h2>
-                <WorkspaceStats metrics={metricsData} />
+                <WorkspaceStats concernsFilter={concernsFilter} />
                 <h2 className="text-xl font-semibold mt-6 text-blue-400">Manage Concerns</h2>
-                {
-                    concerns === undefined ? <LoadingSpinner /> :
-                    <ConcernList concerns={concerns} fetchUserConcerns={fetchCategoryConcerns} />
-                }
+                <ConcernList userData={userData} concernsFilter={concernsFilter} />
             </main>
             <Footer />
         </div>
     );
 }
-
-export default AdminWorkspace;
