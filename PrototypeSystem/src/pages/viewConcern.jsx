@@ -1,56 +1,92 @@
 import Footer from '../components/footer';
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { FaArrowLeft } from 'react-icons/fa';
+import { useParams } from 'react-router-dom';
+import BackArrow from '../components/backArrow';
 import ConcernDetails from '../components/concernDetails';
 import DiscussionThread from '../components/discussionThread';
 import Database from '../services/database';
 import LoadingSpinner from '../components/loading';
+import { showInfoToast, showSuccessToast, showErrorToast } from '../components/toastNotification';
 
 export function ViewConcern({ userData }) {
-    const navigate = useNavigate();
     const { concernId } = useParams();
     const [concern, setConcern] = useState(null);
     const [concernCreator, setConcernCreator] = useState(null);
-    const [status, setStatus] = useState('');
+    const [status, _setStatus] = useState("");
+    const [isAssigned, _setIsAssigned] = useState(false);
+
+    function setStatus(newStatus) {
+        if (newStatus === "Open" && status === "In Progress") {
+            alert("Concern cannot be set to Open once In Progress status.");
+            return;
+        }
+
+        concern.updateStatus(newStatus);
+        _setStatus(newStatus);
+
+        if (userData.isAdmin() && !concern.isAdminAssigned(userData)) {
+            setIsAssigned(true);
+        }
+
+        concern.discussion.sendSystemMessage(`This concern is now marked as ${newStatus}.`);
+        concern.saveToDatabase();
+        showInfoToast(`Status updated to ${newStatus}.`);
+    }
+
+    function setIsAssigned(isAssigned) {
+        const isAlreadyAssigned = concern.isAdminAssigned(userData);
+
+        if (isAssigned) {
+            concern.assignAdmin(userData);
+        } else {
+            if (!isAlreadyAssigned) {
+                showErrorToast("Admin is not assigned to this concern.");
+                return;
+            }
+
+            concern.unassignAdmin(userData);
+            showSuccessToast("Admin unassigned successfully.");
+        }
+
+        _setIsAssigned(isAssigned);
+        concern.saveToDatabase();
+    }
 
     useEffect(() => {
         async function fetchConcern() {
             const fetchedConcern = await Database.getConcern(String(concernId));
             setConcern(fetchedConcern);
             setConcernCreator(await fetchedConcern.fetchCreator(userData));
+            _setStatus(fetchedConcern.status);
+            _setIsAssigned(fetchedConcern.isAdminAssigned(userData));
         }
-        fetchConcern();
+
+        if (userData) {
+            fetchConcern();
+        }
     }, [concernId, userData]);
-
-    const handleBackClick = () => {
-        navigate('/my-concerns');
-    };
-
-    const handleStatusChange = (newStatus) => {
-        setStatus(newStatus);
-    };
 
     return (
         <div className="min-h-screen flex flex-col">
             <main className="p-6 gap-4">
-                <div className="flex items-center mb-4 cursor-pointer" onClick={handleBackClick}>
-                    <FaArrowLeft className="mr-2 text-blue-400" />
-                    <h1 className="text-3xl font-bold mb-4 text-blue-400">View Concerns</h1>
-                </div>
+                <BackArrow label='Back'/>
                 {
                     concern === null ? <LoadingSpinner /> : <>
                         <ConcernDetails
                             concern={concern}
                             concernCreator={concernCreator}
                             userData={userData}
-                            onStatusChange={handleStatusChange}
+                            status={status}
+                            setStatus={setStatus}
+                            isAssigned={isAssigned}
+                            setIsAssigned={setIsAssigned}
                         />
 
                         <DiscussionThread
                             userData={userData}
                             concern={concern}
                             status={status}
+                            setStatus={setStatus}
                         />
                     </>
                 }
