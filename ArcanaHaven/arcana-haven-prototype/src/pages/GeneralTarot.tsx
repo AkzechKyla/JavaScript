@@ -79,7 +79,7 @@ export default function GeneralTarot() {
                         onClick={resetSelection}
                         className="mt-6 px-4 py-2 bg-red-600 text-white font-bold rounded-lg shadow-md hover:bg-red-700"
                     >
-                        Reset Selection
+                        Try Another Reading
                     </button>
                 </div>
             )}

@@ -13,7 +13,7 @@ export default function TarotCard({ card, onSelect, isSelected, isDisabled }: Ta
             isSelected ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-100"
         }`}
     >
-        <img src={card.image} alt={card.name} className="w-24 h-36 mx-auto" />
-        <p className="mt-2 font-semibold">{card.name}</p>
+        <img src={card.image} className="w-24 h-36 mx-auto" />
+        <p className="mt-2 font-semibold"></p>
     </button>
 }
