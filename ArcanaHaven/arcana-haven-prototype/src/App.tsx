@@ -1,9 +1,6 @@
-import './App.css'
-
 function App() {
-
   return <>
-      <p>Arcana Haven Prototype</p>
+      <p className="text-3xl font-bold underline">Arcana Haven Prototype</p>
   </>
 }
 
