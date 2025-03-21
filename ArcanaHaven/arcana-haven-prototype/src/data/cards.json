@@ -1,0 +1,32 @@
+[
+    {
+        "name": "The Fool",
+        "image": "/cards/the_fool.jpg",
+        "meaning": "New beginnings, innocence, spontaneity"
+    },
+    {
+        "name": "The Magician",
+        "image": "/cards/the_magician.jpg",
+        "meaning": "Manifestation, power, resourcefulness"
+    },
+    {
+        "name": "The High Priestess",
+        "image": "/cards/the_high_priestess.jpg",
+        "meaning": "Intuition, wisdom, mystery"
+    },
+    {
+        "name": "The Empress",
+        "image": "/cards/the_empress.jpg",
+        "meaning": "Abundance, nurturing, fertility"
+    },
+    {
+        "name": "The Emperor",
+        "image": "/cards/the_emperor.jpg",
+        "meaning": "Authority, structure, stability"
+    },
+    {
+        "name": "The Hierophant",
+        "image": "/cards/the_hierophant.jpg",
+        "meaning": "Tradition, guidance, spirituality"
+    }
+]
