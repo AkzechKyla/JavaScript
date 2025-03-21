@@ -11,8 +11,14 @@ export default function GeneralTarot() {
         position: string
      }[]>([]);
 
-    useEffect(() => {
-        TarotDeck.fetchDeck().then(setDeck);
+     useEffect(() => {
+        async function loadDeck() {
+            const deck = await TarotDeck.fetchDeck();
+            deck.shuffle();
+            setDeck(deck);
+        }
+
+        loadDeck();
     }, []);
 
     function handleCardSelect(cardName: string) {
@@ -28,8 +34,13 @@ export default function GeneralTarot() {
     }
 
     function resetSelection() {
+        if (!deck) return;
+
+        deck.shuffle();
+        setDeck(new TarotDeck([...deck.cards]));
         setSelectedCards([]);
     }
+
 
     return (
         <div className="max-w-lg mx-auto text-center">
