@@ -1,3 +1,5 @@
+import {model, generationConfig} from "../gemini.ts"
+
 export class TarotDeck {
     cards: {
         name: string;
@@ -39,4 +41,19 @@ export class TarotDeck {
         }
     }
 
+    static async getTarotReading(question: string, selectedCards: { name: string; position: string }[]) {
+        const chatSession = model.startChat({ generationConfig, history: [] });
+
+        const formattedCards = selectedCards
+          .map((card, index) => {
+            const position = ["PAST", "PRESENT", "FUTURE"][index] || "UNKNOWN";
+            return `**${position}:** ${card.name} (${card.position})`;
+          })
+          .join("\n");
+
+        const prompt = `You are a tarot reader. A person asked: "${question}". They pulled these three cards:\n${formattedCards}.\n\nGive a Tarot Reading based on the following format: (Strictly in this format only. Do not add any introduction lines.)\n\n**PAST:**\n**PRESENT:**\n**FUTURE:**`;
+
+        const result = await chatSession.sendMessage(prompt);
+        return result.response.text();
+    }
 }
