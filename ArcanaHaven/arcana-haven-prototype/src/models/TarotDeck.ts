@@ -62,7 +62,7 @@ export class TarotDeck {
           })
           .join("\n");
 
-          const prompt = `You are a tarot reader. A person asked: "${question}". They pulled these three cards:\n${formattedCards}.\n\nGive a Tarot Reading based on the following format: (Strictly in JSON format only. Do not add any introduction lines. Do not include markdown code block "\`\`\`json", just plain text only.)
+          const prompt = `You are a tarot reader. A person asked: "${question}". They pulled these three cards:\n${formattedCards}.\n\nGive a Tarot Reading based on the following format: (Use JSON format. Do not include markdown code block "\`\`\`json", just plain text only.)
 
           {
               "past": {
