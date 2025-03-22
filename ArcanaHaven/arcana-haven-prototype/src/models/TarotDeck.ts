@@ -1,5 +1,16 @@
 import {model, generationConfig} from "../gemini.ts"
 
+interface Reading {
+    card: string;
+    reading: string;
+}
+
+interface Readings {
+    past: Reading;
+    present: Reading;
+    future: Reading;
+}
+
 export class TarotDeck {
     cards: {
         name: string;
@@ -41,7 +52,7 @@ export class TarotDeck {
         }
     }
 
-    static async getTarotReading(question: string, selectedCards: { name: string; position: string }[]) {
+    static async getTarotReading(question: string, selectedCards: { name: string; position: string }[]): Promise<Readings> {
         const chatSession = model.startChat({ generationConfig, history: [] });
 
         const formattedCards = selectedCards
@@ -51,9 +62,25 @@ export class TarotDeck {
           })
           .join("\n");
 
-        const prompt = `You are a tarot reader. A person asked: "${question}". They pulled these three cards:\n${formattedCards}.\n\nGive a Tarot Reading based on the following format: (Strictly in this format only. Do not add any introduction lines.)\n\n**PAST:**\n**PRESENT:**\n**FUTURE:**`;
+          const prompt = `You are a tarot reader. A person asked: "${question}". They pulled these three cards:\n${formattedCards}.\n\nGive a Tarot Reading based on the following format: (Strictly in JSON format only. Do not add any introduction lines. Do not include markdown code block "\`\`\`json", just plain text only.)
+
+          {
+              "past": {
+                  "card": "",
+                  "reading": ""
+              },
+              "present": {
+                  "card": "",
+                  "reading": ""
+              },
+              "future": {
+                  "card": "",
+                  "reading": ""
+              }
+          }`;
 
         const result = await chatSession.sendMessage(prompt);
-        return result.response.text();
+        const text = result.response.text();
+        return JSON.parse(text);
     }
 }
