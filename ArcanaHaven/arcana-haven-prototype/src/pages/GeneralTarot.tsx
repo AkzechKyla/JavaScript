@@ -2,16 +2,24 @@ import { useState, useEffect } from "react";
 import { TarotDeck } from "../models/TarotDeck";
 import TarotCard from "../components/TarotCard"
 
-export default function GeneralTarot() {
+export default function QuestionTarot() {
     const [deck, setDeck] = useState<TarotDeck | null>(null);
     const [selectedCards, setSelectedCards] = useState<{
         name: string;
         image: string;
         meaning: string;
         position: string
-     }[]>([]);
+    }[]>([]);
+    const promptQuestion = `Give me a general tarot reading based on the cards I will pull.`;
+    const [readingResult, setReadingResult] = useState<{
+        past: string;
+        present: string;
+        future: string
+    } | null>(null);
+    const [loading, setLoading] = useState(false);
 
-     useEffect(() => {
+
+    useEffect(() => {
         async function loadDeck() {
             const deck = await TarotDeck.fetchDeck();
             deck.shuffle();
@@ -39,13 +47,28 @@ export default function GeneralTarot() {
         deck.shuffle();
         setDeck(new TarotDeck([...deck.cards]));
         setSelectedCards([]);
+        setReadingResult(null);
     }
 
+    async function handleGetReading() {
+        if (selectedCards.length !== 3) return;
+        setLoading(true);
+        try {
+            const result = await TarotDeck.getTarotReading(promptQuestion, selectedCards);
+            setReadingResult({
+                past: result["past"]["reading"],
+                present: result["present"]["reading"],
+                future: result["future"]["reading"],
+            });
+        } catch (error) {
+            console.error("Error fetching tarot reading:", error);
+        }
+        setLoading(false);
+    }
 
     return (
         <div className="max-w-lg mx-auto text-center">
             <h1 className="text-4xl font-bold text-purple-700 my-6">General Tarot</h1>
-            <p className="font-bold">Think about your life situation</p>
             <p className="italic">Select 3 cards</p>
 
             {/* Display Tarot Deck */}
@@ -75,6 +98,30 @@ export default function GeneralTarot() {
                             </div>
                         ))}
                     </div>
+
+                    {/* Tarot Reading Input and Button */}
+
+                    <button
+                        onClick={handleGetReading}
+                        disabled={selectedCards.length !== 3 || loading}
+                        className={`mt-4 px-4 py-2 font-bold rounded-lg shadow-md ${selectedCards.length !== 3 || loading
+                                ? "bg-gray-400 text-white cursor-not-allowed"
+                                : "bg-blue-600 text-white hover:bg-blue-700"
+                        }`}
+                    >
+                        {loading ? "Getting Reading..." : "Get Reading"}
+                    </button>
+
+                    {/* Display Reading Result */}
+                    {readingResult && (
+                        <div className="mt-4 p-4 border rounded-lg bg-gray-100">
+                            <h3 className="text-lg font-bold">Your Tarot Reading:</h3>
+                            <p><strong>Past:</strong> {readingResult.past}</p>
+                            <p><strong>Present:</strong> {readingResult.present}</p>
+                            <p><strong>Future:</strong> {readingResult.future}</p>
+                        </div>
+                    )}
+
                     <button
                         onClick={resetSelection}
                         className="mt-6 px-4 py-2 bg-red-600 text-white font-bold rounded-lg shadow-md hover:bg-red-700"
