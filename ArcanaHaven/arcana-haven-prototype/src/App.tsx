@@ -13,9 +13,6 @@ function App() {
           </Link>
           <ul>
             <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li>
               <Link to="/reading-collection">Reading Collection</Link>
             </li>
             <li>

@@ -69,6 +69,7 @@ export default function QuestionTarot() {
     return (
         <div className="max-w-lg mx-auto text-center">
             <h1 className="text-4xl font-bold text-purple-700 my-6">Ask a Question Tarot</h1>
+            <p className="font-bold">Ask me anything</p>
             <input
                 type="text"
                 value={userQuestion}
