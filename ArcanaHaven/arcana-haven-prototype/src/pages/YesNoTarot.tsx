@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { TarotDeck } from "../models/TarotDeck";
 import TarotCard from "../components/TarotCard"
 
-export default function QuestionTarot() {
+export default function YesNoTarot() {
     const [deck, setDeck] = useState<TarotDeck | null>(null);
     const [selectedCards, setSelectedCards] = useState<{
         name: string;
@@ -30,7 +30,7 @@ export default function QuestionTarot() {
     }, []);
 
     function handleCardSelect(cardName: string) {
-        if (!deck || selectedCards.length >= 3 || selectedCards.some(c => c.name === cardName)) return;
+        if (!deck || selectedCards.length >= 1 || selectedCards.some(c => c.name === cardName)) return;
 
         const card = deck.getCardByName(cardName);
         if (card) {
@@ -51,7 +51,7 @@ export default function QuestionTarot() {
     }
 
     async function handleGetReading() {
-        if (selectedCards.length !== 3) return;
+        if (selectedCards.length !== 1) return;
         setLoading(true);
         try {
             const result = await TarotDeck.getTarotReading(promptQuestion, selectedCards);
@@ -68,9 +68,9 @@ export default function QuestionTarot() {
 
     return (
         <div className="max-w-lg mx-auto text-center">
-            <h1 className="text-4xl font-bold text-purple-700 my-6">General Tarot</h1>
-            <p className="font-bold">Thinking about your life situation</p>
-            <p className="italic">Select 3 cards</p>
+            <h1 className="text-4xl font-bold text-purple-700 my-6">Yes/No Tarot</h1>
+            <p className="font-bold">Thinking about your question</p>
+            <p className="italic">Select 1 card</p>
 
             {/* Display Tarot Deck */}
             <div className="grid grid-cols-3 gap-4 mt-6">
@@ -80,7 +80,7 @@ export default function QuestionTarot() {
                         card={card}
                         onSelect={() => handleCardSelect(card.name)}
                         isSelected={selectedCards.some(c => c.name === card.name)}
-                        isDisabled={selectedCards.length >= 3}
+                        isDisabled={selectedCards.length >= 1}
                     />
                 ))}
             </div>
@@ -88,7 +88,7 @@ export default function QuestionTarot() {
             {/* Display Selected Cards */}
             {selectedCards.length > 0 && (
                 <div className="mt-6">
-                    <h3 className="text-lg font-bold">Your Selected Cards:</h3>
+                    <h3 className="text-lg font-bold">Your Selected Card:</h3>
                     <div className="flex justify-center gap-4 mt-4">
                         {selectedCards.map((card, index) => (
                             <div key={index} className="text-center">
@@ -101,11 +101,10 @@ export default function QuestionTarot() {
                     </div>
 
                     {/* Tarot Reading Input and Button */}
-
                     <button
                         onClick={handleGetReading}
-                        disabled={selectedCards.length !== 3 || loading}
-                        className={`mt-4 px-4 py-2 font-bold rounded-lg shadow-md ${selectedCards.length !== 3 || loading
+                        disabled={selectedCards.length !== 1 || loading}
+                        className={`mt-4 px-4 py-2 font-bold rounded-lg shadow-md ${selectedCards.length !== 1 || loading
                                 ? "bg-gray-400 text-white cursor-not-allowed"
                                 : "bg-blue-600 text-white hover:bg-blue-700"
                         }`}
