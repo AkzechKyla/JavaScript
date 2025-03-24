@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import GeneralTarot from "./pages/GeneralTarot";
 import QuestionTarot from "./pages/QuestionTarot"
+import YesNoTarot from "./pages/YesNoTarot"
 
 function App() {
   return (
@@ -62,7 +63,7 @@ function App() {
           <Route path="/reading-collection" element={<div>Reading Collection</div>} />
           <Route path="/tarot/general" element={<GeneralTarot />} />
           <Route path="/tarot/question" element={<QuestionTarot />} />
-          <Route path="/tarot/yesno" element={<div>Yes/No Tarot</div>} />
+          <Route path="/tarot/yesno" element={<YesNoTarot />} />
           <Route path="/cards/major-arcana" element={<div>Major Arcana Meanings</div>} />
           <Route path="/cards/wands" element={<div>Wands Meanings</div>} />
           <Route path="/cards/cups" element={<div>Cups Meanings</div>} />
