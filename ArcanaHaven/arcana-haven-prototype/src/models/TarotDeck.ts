@@ -83,4 +83,20 @@ export class TarotDeck {
         const text = result.response.text();
         return JSON.parse(text);
     }
+
+    static async getYesNoTarotReading(selectedCard: { name: string; position: string }): Promise<{ card: string; boolean: string; reading: string }> {
+        const chatSession = model.startChat({ generationConfig, history: [] });
+
+        const prompt = `You are a tarot reader. A person pulled this card: **${selectedCard.name}** in the **${selectedCard.position}** position.\n\nDetermine if it's a Yes or No answer and provide a brief explanation based on the following format: (Use JSON format. Do not include markdown code block "\`\`\`json", just plain text only.)
+
+        {
+            "card": "",
+            "boolean": "",
+            "reading": ""
+        }`;
+
+        const result = await chatSession.sendMessage(prompt);
+        const text = result.response.text();
+        return JSON.parse(text);
+    }
 }

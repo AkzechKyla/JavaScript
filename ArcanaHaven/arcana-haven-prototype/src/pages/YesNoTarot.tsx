@@ -10,11 +10,10 @@ export default function YesNoTarot() {
         meaning: string;
         position: string
     }[]>([]);
-    const promptQuestion = `Give me a general tarot reading based on the cards I will pull.`;
     const [readingResult, setReadingResult] = useState<{
-        past: string;
-        present: string;
-        future: string
+        card: string;
+        boolean: string;
+        reading: string;
     } | null>(null);
     const [loading, setLoading] = useState(false);
 
@@ -54,11 +53,11 @@ export default function YesNoTarot() {
         if (selectedCards.length !== 1) return;
         setLoading(true);
         try {
-            const result = await TarotDeck.getTarotReading(promptQuestion, selectedCards);
+            const result = await TarotDeck.getYesNoTarotReading(selectedCards[0]);
             setReadingResult({
-                past: result["past"]["reading"],
-                present: result["present"]["reading"],
-                future: result["future"]["reading"],
+                card: result.card,
+                boolean: result.boolean,
+                reading: result.reading,
             });
         } catch (error) {
             console.error("Error fetching tarot reading:", error);
@@ -116,9 +115,9 @@ export default function YesNoTarot() {
                     {readingResult && (
                         <div className="mt-4 p-4 border rounded-lg bg-gray-100">
                             <h3 className="text-lg font-bold">Your Tarot Reading:</h3>
-                            <p><strong>Past:</strong> {readingResult.past}</p>
-                            <p><strong>Present:</strong> {readingResult.present}</p>
-                            <p><strong>Future:</strong> {readingResult.future}</p>
+                            <p><strong>Card:</strong> {readingResult.card}</p>
+                            <p><strong>Answer:</strong> {readingResult.boolean}</p>
+                            <p><strong>Interpretation:</strong> {readingResult.reading}</p>
                         </div>
                     )}
 
