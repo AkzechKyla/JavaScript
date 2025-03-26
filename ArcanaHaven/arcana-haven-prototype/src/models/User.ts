@@ -1,6 +1,6 @@
 import Collection from "./Collection";
 
-export class User {
+export default class User {
     id: string;
     collections: Collection;
 
