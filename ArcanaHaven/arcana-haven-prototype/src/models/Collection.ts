@@ -12,7 +12,7 @@ export default class Collection {
         localStorage.setItem(this.storageKey, JSON.stringify(updatedReadings));
     }
 
-    getReadings(): any[] {
+    getReadings(): { id: number, past: string, present: string, future: string, cards: { name: string; image: string; meaning: string; position: string }[] }[] {
         const saved = localStorage.getItem(this.storageKey);
         return saved ? JSON.parse(saved) : [];
     }
