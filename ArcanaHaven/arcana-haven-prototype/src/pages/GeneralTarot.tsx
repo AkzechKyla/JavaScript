@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { TarotDeck } from "../models/TarotDeck";
 import TarotCard from "../components/TarotCard"
+import User from "../models/User";
 
 export default function QuestionTarot() {
+    const user = new User("demoUser");
     const [deck, setDeck] = useState<TarotDeck | null>(null);
     const [selectedCards, setSelectedCards] = useState<{
         name: string;
@@ -17,6 +19,13 @@ export default function QuestionTarot() {
         future: string
     } | null>(null);
     const [loading, setLoading] = useState(false);
+    const [savedReadings, setSavedReadings] = useState<{
+        id: number;
+        past: string;
+        present: string;
+        future: string;
+        cards: { name: string; image: string; meaning: string; position: string }[];
+    }[]>([]);
 
 
     useEffect(() => {
@@ -55,15 +64,23 @@ export default function QuestionTarot() {
         setLoading(true);
         try {
             const result = await TarotDeck.getTarotReading(promptQuestion, selectedCards);
-            setReadingResult({
-                past: result["past"]["reading"],
-                present: result["present"]["reading"],
-                future: result["future"]["reading"],
-            });
+            const reading = {
+                past: result.past.reading,
+                present: result.present.reading,
+                future: result.future.reading,
+            };
+            user.collections.saveReading(selectedCards.map(card => card.name), JSON.stringify(reading));
         } catch (error) {
             console.error("Error fetching tarot reading:", error);
+        } finally {
+            setSavedReadings([...user.collections.getReadings()]); // Ensure state updates
+            setLoading(false);
         }
-        setLoading(false);
+    }
+
+    function deleteReading(id: number) {
+        user.collections.deleteReading(id);
+        setSavedReadings(user.collections.getReadings()); // Refresh saved readings
     }
 
     return (
@@ -129,6 +146,31 @@ export default function QuestionTarot() {
                     >
                         Try Another Reading
                     </button>
+                </div>
+            )}
+            {/* Saved Readings */}
+            {savedReadings.length > 0 && (
+                <div className="mt-10 p-4 border rounded-lg bg-gray-100">
+                    <h2 className="text-lg font-bold">Saved Readings</h2>
+                    {savedReadings.map((reading) => (
+                        <div key={reading.id} className="mt-4 p-3 border rounded-lg bg-white shadow-md">
+                            <h3 className="text-md font-semibold">Reading #{reading.id}</h3>
+                            <div className="flex justify-center gap-2 mt-2">
+                                {reading.cards.map((card: any, index: number) => (
+                                    <img key={index} src={card.image} alt={card.name} className="w-20 h-32 border rounded-md" />
+                                ))}
+                            </div>
+                            <p className="mt-2"><strong>Past:</strong> {reading.past}</p>
+                            <p><strong>Present:</strong> {reading.present}</p>
+                            <p><strong>Future:</strong> {reading.future}</p>
+                            <button
+                                onClick={() => deleteReading(reading.id)}
+                                className="mt-2 px-2 py-1 bg-red-500 text-white text-xs font-bold rounded-lg shadow-md hover:bg-red-700"
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    ))}
                 </div>
             )}
         </div>
