@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -27,24 +28,24 @@ export default function RootLayout({
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 				<h1 className="text-3xl font-bold underline">Arcana Haven Prototype</h1>
 				<nav>
-					<p className="text-xl font-bold">Personal</p>
+					<Link href="/" className="text-xl font-bold">Personal</Link>
 					<ul>
-						<li>Reading Collection</li>
-						<li>Sign Out</li>
+						<Link href="/collection"><li>Reading Collection</li></Link>
+						<Link href="/"><li>Sign Out</li></Link>
 					</ul>
-					<p className="text-xl font-bold">Tarot Readings</p>
+					<Link href="/tarot" className="text-xl font-bold">Tarot Reading</Link>
 					<ul>
-						<li>General Tarot</li>
-						<li>Ask a Question</li>
-						<li>Yes/No Tarot</li>
+						<Link href="/tarot/general"><li>General Tarot</li></Link>
+						<Link href="/tarot/ask-question"><li>Ask a Question</li></Link>
+						<Link href="/tarot/yes-no"><li>Yes/No Tarot</li></Link>
 					</ul>
-					<p className="text-xl font-bold">Card Meanings</p>
+					<Link href="/cards" className="text-xl font-bold">Card Meanings</Link>
 					<ul>
-						<li>Major Arcana</li>
-						<li>Wands</li>
-						<li>Cups</li>
-						<li>Swords</li>
-						<li>Pentacles</li>
+						<Link href="/cards/major"><li>Major Arcana</li></Link>
+						<Link href="/cards/wands" ><li>Wands</li></Link>
+						<Link href="/cards/cups"><li>Cups</li></Link>
+						<Link href="/cards/swords"><li>Swords</li></Link>
+						<Link href="/cards/pentacles"><li>Pentacles</li></Link>
 					</ul>
 				</nav>
 				{children}
