@@ -11,7 +11,7 @@ function calculate(operation) {
     const b = parseFloat(num2);
 
     if (num1 === "" || num2 === "" || isNaN(a) || isNaN(b)) {
-        errorDisplay.textContent = "⚠️ Please enter valid numbers, cutie!";
+        errorDisplay.textContent = "⚠️ Please enter valid numbers!";
         return;
     }
 
@@ -28,7 +28,7 @@ function calculate(operation) {
             break;
         case "divide":
             if (b === 0) {
-                errorDisplay.textContent = "🚫 You can't divide by zero, silly!";
+                errorDisplay.textContent = "🚫 You can't divide by zero!";
                 return;
             }
         result = a / b;
