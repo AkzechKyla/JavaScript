@@ -17,42 +17,51 @@
       background: url('https://clipart-library.com/2023/pocket-calculator-doodle-sketch-school-supply-finance-equipment-hand-drawn-vector-illustration-outline-clipart-isolated-white_534604-1646.jpg') no-repeat center center fixed;
     }
 
-        <style>
-            #input-box {
-                width: 100px;
-            }
-        </style>
-    </head>
-    <body onload="updateBox(calculation)">
-        <h3>Simple Calculator</h3>
-        <input type="text" id="input-box" name="input-box">
-        <p>
-            <button onclick="updateCalculation(1)">1</button>
-            <button onclick="updateCalculation(2)">2</button>
-            <button onclick="updateCalculation(3)">3</button>
-            <button onclick="updateCalculation(' + ')">+</button>
-        </p>
-        <p>
-            <button onclick="updateCalculation(4)">4</button>
-            <button onclick="updateCalculation(5)">5</button>
-            <button onclick="updateCalculation(6)">6</button>
-            <button onclick="updateCalculation(' - ')">-</button>
-        </p>
-        <p>
-            <button onclick="updateCalculation(7)">7</button>
-            <button onclick="updateCalculation(8)">8</button>
-            <button onclick="updateCalculation(9)">9</button>
-            <button onclick="updateCalculation(' * ')">*</button>
-        </p>
-        <p>
-            <button onclick="updateCalculation(0)">0</button>
-            <button onclick="updateCalculation('.')">.</button>
-            <button onclick="calculateResult()">=</button>
-            <button onclick="updateCalculation(' / ')">/</button>
-        </p>
-        <p>
-            <button onclick="clearCalculation()">Clear</button>
-        </p>
+    .calculator-wrapper {
+      position: relative;
+      width: 390px;
+      height: 530px;
+    }
+
+    .button {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border: none;
+      background-color: transparent;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .button:active {
+      transform: scale(0.95);
+    }
+
+    #input-box {
+      position: absolute;
+      top: 25px;
+      left: 32px;
+      width: 300px;
+      height: 70px;
+      background-color: transparent;
+      border: none;
+      font-size: 1.5rem;
+      text-align: right;
+      pointer-events: none;
+      font-family: 'Permanent Marker', cursive;
+    }
+  </style>
+</head>
+<body onload="updateBox(calculation)">
+  <div class="calculator-wrapper">
+    <input type="text" id="input-box" readonly />
+
+    <!-- Buttons -->
+    <button class="button" style="top: 173px; left: 28px;" onclick="updateCalculation(7)"></button>
+    <button class="button" style="top: 170px; left: 113px;" onclick="updateCalculation(8)"></button>
+    <button class="button" style="top: 170px; left: 198px;" onclick="updateCalculation(9)"></button>
+    <button class="button" style="top: 170px; left: 273px;" onclick="updateCalculation(' / ')"></button>
 
         <script>
             let calculation = localStorage.getItem('calculation') || '';
