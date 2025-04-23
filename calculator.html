@@ -81,14 +81,38 @@
     <button class="button" style="top: 310px; left: 20px; width: 200px;" onclick="clearCalculation()">Clear</button>
   </div>
 
-            function updateBox(calculation) {
-                let inputBox = document.getElementById('input-box');
-                inputBox.value = calculation;
-            }
+  <script>
+    let calculation = localStorage.getItem('calculation') || '';
 
-            function saveCalculation(calculation) {
-                localStorage.setItem('calculation', calculation);
-            }
-        </script>
-    </body>
+    function updateCalculation(val) {
+      calculation += val;
+      saveCalculation();
+      updateBox(calculation);
+    }
+
+    function calculateResult() {
+      try {
+        calculation = eval(calculation).toString();
+      } catch {
+        calculation = 'Error';
+      }
+      saveCalculation();
+      updateBox(calculation);
+    }
+
+    function clearCalculation() {
+      calculation = '';
+      saveCalculation();
+      updateBox(calculation);
+    }
+
+    function updateBox(val) {
+      document.getElementById('input-box').value = val;
+    }
+
+    function saveCalculation() {
+      localStorage.setItem('calculation', calculation);
+    }
+  </script>
+</body>
 </html>
