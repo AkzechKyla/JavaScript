@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-size: small;
+    background: url('starry-purple-night-sky.png') no-repeat center center;
+    background-size: cover;
+}
+
+.container {
+    width: 340px;
+    color: #fff;
+    border-radius: 10px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    padding: 10px 25px 20px 25px;
+    justify-content: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+label, input, select {
+    display: block;
+    font-size: small;
+    width: 100%;
+}
+
+a {
+    color: #fff;
+}
+
+input, select {
+    border-radius: 20px;
+    padding: 3px 5px 3px 10px;
+}
+
+label {
+    margin-bottom: 5px; /* spacing between label and input */
+}
+
+input[type="radio"] {
+    width: auto;
+}
+
+.gender-buttons {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.checkbox-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.submit-btn {
+    height: 40px;
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+#terms {
+    width: auto;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+}
