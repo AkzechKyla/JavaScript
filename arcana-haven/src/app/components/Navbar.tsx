@@ -5,7 +5,9 @@ export default function Navbar() {
         <nav className="flex flex-col items-center justify-center text-center">
             <Link href="/" className="text-2xl font-bold">Personal</Link>
             <ul>
-                <Link href="/collection"><li className="text-lg">Reading Collection</li></Link>
+                <li className="text-lg hover:text-purple-500 transition-all duration-200">
+                    <Link href="/collection">Reading Collection</Link>
+                </li>
                 <Link href="/"><li className="text-lg">Sign Out</li></Link>
             </ul>
             <Link href="/tarot" className="text-2xl font-bold">Tarot Reading</Link>
