@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>15x15 Grid Line Drawer</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .grid-container {
+      position: relative;
+      width: 464px;
+      height: 464px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(15, 30px);
+      grid-template-rows: repeat(15, 30px);
+      gap: 1px;
+      z-index: 1;
+      position: relative;
+    }
+
+    .cell {
+      width: 30px;
+      height: 30px;
+      background-color: #e0e0e0;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-container">
+    <canvas id="canvas" width="464" height="464"></canvas>
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <script>
+    const grid = document.getElementById('grid');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    let firstPoint = null;
+
+    // Create 15x15 grid
+    for (let y = 0; y < 15; y++) {
+      for (let x = 0; x < 15; x++) {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        cell.dataset.x = x;
+        cell.dataset.y = y;
+        grid.appendChild(cell);
+      }
+    }
+
+    // Convert grid coordinates to canvas coordinates
+    function gridToCanvas(x, y) {
+      const gap = 1;
+      const cellSize = 30;
+      const cellWithGap = cellSize + gap;
+      return {
+        cx: x * cellWithGap + cellSize / 2,
+        cy: y * cellWithGap + cellSize / 2
+      };
+    }
+
+    // Handle click
+    grid.addEventListener('click', (e) => {
+      const cell = e.target.closest('.cell');
+      if (!cell) return;
+
+      const x = parseInt(cell.dataset.x);
+      const y = parseInt(cell.dataset.y);
+      console.log(`Clicked: ${x}, ${y}`);
+
+      if (!firstPoint) {
+        firstPoint = { x, y };
+      } else {
+        const start = gridToCanvas(firstPoint.x, firstPoint.y);
+        const end = gridToCanvas(x, y);
+        ctx.beginPath();
+        ctx.moveTo(start.cx, start.cy);
+        ctx.lineTo(end.cx, end.cy);
+        ctx.strokeStyle = 'red';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        firstPoint = null;
+      }
+    });
+  </script>
+</body>
+</html>
