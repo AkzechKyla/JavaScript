@@ -8,7 +8,9 @@ export default function Navbar() {
                 <li className="text-lg hover:text-purple-500 transition-all duration-200">
                     <Link href="/collection">Reading Collection</Link>
                 </li>
-                <Link href="/"><li className="text-lg">Sign Out</li></Link>
+                <li className="text-lg hover:text-purple-500 transition-all duration-200">
+                    <Link href="/">Sign Out</Link>
+                </li>
             </ul>
             <Link href="/tarot" className="text-2xl font-bold">Tarot Reading</Link>
             <ul>
